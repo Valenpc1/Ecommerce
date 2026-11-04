@@ -88,6 +88,8 @@ h3 { word-spacing: 0.06em; }
 
 /* Bento (Flexbox puro) */
 .bento { display: flex; flex-wrap: wrap; gap: var(--gap); }
+.grupo { margin-bottom: 14px; color: var(--ink-2); font-size: var(--fs-small); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.bento + .grupo { margin-top: clamp(28px, 4vw, 48px); }
 .tile {
   flex: 1 1 280px; min-width: 0;
   display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
@@ -110,7 +112,8 @@ a.tile--wide:hover { background: var(--surface-3); }
 .back:hover { color: var(--ink); }
 .prose { display: flex; flex-direction: column; gap: 20px; max-width: 70ch; margin-top: clamp(20px, 3vw, 32px); }
 .prose h2 { margin-top: clamp(20px, 3vw, 36px); }
-.prose ul { display: flex; flex-direction: column; gap: 12px; padding-left: 1.2em; }
+.prose ul, .prose ol { display: flex; flex-direction: column; gap: 12px; padding-left: 1.2em; }
+.prose ol { padding-left: 1.6em; }
 .prose li::marker { color: var(--accent); }
 .prose strong { font-weight: 700; }
 .prose a { color: var(--accent); text-underline-offset: 3px; }
