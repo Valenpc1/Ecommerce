@@ -1,0 +1,5 @@
+model-viewer 4.4.0 (Google) — https://github.com/google/model-viewer
+Licencia: Apache-2.0 (texto completo en model-viewer.LICENSE.txt).
+Archivo: dist/model-viewer.min.js (aquí model-viewer-4.4.0.min.js, con la versión en el nombre) del paquete npm @google/model-viewer@4.4.0, sin modificar.
+Se aloja en el propio sitio para no depender de servidores de terceros. Se carga solo en el inicio,
+al terminar la página, para mostrar el modelo 3D del hero.

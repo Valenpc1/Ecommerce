@@ -1,0 +1,8 @@
+Modelo 3D "Mate Uruguayo." de Ermolli (https://sketchfab.com/ermolli)
+Fuente: https://sketchfab.com/3d-models/mate-uruguayo-e2fd6553b7b144f8afe2dc51929f95a3
+Licencia: Creative Commons Atribución 4.0 (https://creativecommons.org/licenses/by/4.0/)
+
+Cambios realizados: las texturas se redujeron a un máximo de 1024 px y se convirtieron a WebP
+(el archivo pasó de 8,3 MB a 0,85 MB); la malla no se modificó. Los archivos son:
+  mate-v1.glb          modelo optimizado
+  mate-poster-v1.webp  imagen del modelo renderizada desde mate-v1.glb

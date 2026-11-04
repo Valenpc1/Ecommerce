@@ -139,6 +139,74 @@ for (const p of lista) {
   }
 }
 
+/* ───── modelo 3D, activos y app.js ───── */
+const peso = (ruta) => statSync(ruta).size / 1024;
+const VERSIONADO = /-(v\d+|\d+\.\d+(?:\.\d+)?)(?:\.[a-z0-9]+)+$/i;
+const EXENTOS = /^(LEEME|.*LICENSE.*)\.txt$/i;
+for (const p of lista) {
+  const html = leer(p);
+  if (!/data-modelo/.test(html)) continue;
+  const et = `[${rutaDe(p)}]`;
+  const src = (html.match(/data-modelo[^>]*data-src="([^"]+)"/) ?? [])[1];
+  const glb = src ? join(raiz, src) : '';
+  if (!src || !existsSync(glb)) fallo(`${et} el modelo 3D indicado en data-src no existe`);
+  else if (peso(glb) > 1500) fallo(`${et} el modelo 3D pesa ${peso(glb).toFixed(0)} KB (máximo 1500)`);
+  else ok(`${et} modelo 3D de ${peso(glb).toFixed(0)} KB`);
+
+  const poster = html.match(/<img class="hero-poster"([^>]*)>/);
+  if (!poster) fallo(`${et} falta la imagen de póster (.hero-poster)`);
+  else {
+    const psrc = (poster[1].match(/src="([^"]+)"/) ?? [])[1];
+    if (!psrc || !existsSync(join(raiz, psrc))) fallo(`${et} el póster no existe: ${psrc}`);
+    else if (peso(join(raiz, psrc)) > 150) fallo(`${et} el póster pesa ${peso(join(raiz, psrc)).toFixed(0)} KB (máximo 150)`);
+    else ok(`${et} póster de ${peso(join(raiz, psrc)).toFixed(0)} KB`);
+    if (!/alt="[^"]{8,}"/.test(poster[1])) fallo(`${et} el póster necesita un texto alternativo descriptivo`);
+    if (!/width="\d+"/.test(poster[1]) || !/height="\d+"/.test(poster[1])) fallo(`${et} el póster necesita width y height`);
+  }
+
+  const faltan = [
+    [/Ermolli/, 'el autor (Ermolli)'],
+    [/sketchfab\.com\/3d-models\/mate-uruguayo-e2fd6553b7b144f8afe2dc51929f95a3/, 'el enlace a la fuente'],
+    [/CC BY 4\.0/, 'la licencia (CC BY 4.0)'],
+    [/creativecommons\.org\/licenses\/by\/4\.0/, 'el enlace a la licencia'],
+    [/modific/i, 'el aviso de modificaciones']
+  ].filter(([re]) => !re.test(html)).map(([, nombre]) => nombre);
+  if (faltan.length) fallo(`${et} falta en el crédito del modelo 3D: ${faltan.join(', ')}`);
+  else ok(`${et} crédito CC BY 4.0 completo`);
+
+  if (rutaDe(p) === '/') {
+    const psrc = (poster?.[1].match(/src="([^"]+)"/) ?? [])[1];
+    const primera = ['index.html', 'styles.css', 'app.js', 'enlaces.js', psrc].filter(Boolean).map((f) => join(raiz, f)).filter(existsSync).reduce((s, f) => s + peso(f), 0);
+    if (primera > 200) fallo(`${et} la primera carga pesa ${primera.toFixed(0)} KB (máximo 200; el 3D carga después)`);
+    else ok(`${et} primera carga de ${primera.toFixed(0)} KB (el 3D carga después)`);
+  }
+}
+
+for (const carpeta of ['assets', 'vendor']) {
+  const dir = join(raiz, carpeta);
+  if (!existsSync(dir)) continue;
+  for (const nombre of readdirSync(dir)) {
+    if (EXENTOS.test(nombre)) continue;
+    if (!VERSIONADO.test(nombre)) fallo(`${carpeta}/${nombre}: se guarda un año en caché, así que el nombre debe llevar versión (p. ej. -v1 o -4.4.0)`);
+  }
+}
+if (existsSync(join(raiz, 'vendor')) && readdirSync(join(raiz, 'vendor')).some((n) => /^model-viewer/.test(n) && !/LICENSE/i.test(n))) {
+  if (existsSync(join(raiz, 'vendor', 'model-viewer.LICENSE.txt'))) ok('vendor: licencia del visor presente');
+  else fallo('vendor: falta model-viewer.LICENSE.txt (Apache-2.0)');
+}
+
+const rutaApp = join(raiz, 'app.js');
+if (existsSync(rutaApp)) {
+  const app = leer(rutaApp);
+  for (const m of app.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+    if (!/^\/vendor\/model-viewer-\d+\.\d+\.\d+\.min\.js$/.test(m[1]) || !existsSync(join(raiz, m[1]))) fallo(`app.js importa algo no permitido o inexistente: ${m[1]}`);
+    else ok(`app.js importa solo el visor alojado en el sitio (${m[1]})`);
+  }
+  const prohibidos = app.match(/\bfetch\s*\(|XMLHttpRequest|sendBeacon|document\.cookie|localStorage|sessionStorage/g);
+  if (prohibidos) fallo(`app.js usa ${[...new Set(prohibidos)].join(', ')}: el sitio no rastrea ni pide datos`);
+  else ok('app.js: sin peticiones propias, cookies ni almacenamiento');
+}
+
 /* ───── diseño ───── */
 const rutaCss = join(raiz, 'styles.css');
 if (!existsSync(rutaCss)) fallo('falta styles.css');

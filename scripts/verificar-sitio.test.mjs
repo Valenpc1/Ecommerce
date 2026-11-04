@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { cpSync, mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { cpSync, mkdtempSync, readFileSync, writeFileSync, rmSync, renameSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -128,4 +128,61 @@ test('un canonical ausente o distinto del sitemap falla', () => {
 test('falta de lang o de meta description falla', () => {
   assert.equal(conMutacion((d) => editar(d, 'index.html', (t) => t.replace('lang="es-AR"', 'lang="es"'))).status, 1);
   assert.equal(conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/<meta name="description"[^>]*>/, ''))).status, 1);
+});
+
+/* ───── modelo 3D, activos y app.js ───── */
+test('el crédito CC BY incompleto del modelo 3D falla', () => {
+  const r = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/Se modificó: texturas reducidas de tamaño\./, '')));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /falta en el crédito del modelo 3D: el aviso de modificaciones/);
+  const sinAutor = conMutacion((d) => editar(d, 'index.html', (t) => t.replaceAll('Ermolli', 'alguien')));
+  assert.equal(sinAutor.status, 1);
+  assert.match(sinAutor.stderr, /el autor \(Ermolli\)/);
+});
+
+test('un póster sin texto alternativo o sin tamaño falla', () => {
+  const sinAlt = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/ alt="Mate uruguayo[^"]*"/, ' alt=""')));
+  assert.equal(sinAlt.status, 1);
+  assert.match(sinAlt.stderr, /texto alternativo descriptivo/);
+  const sinTam = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(' width="1024" height="1024"', '')));
+  assert.equal(sinTam.status, 1);
+  assert.match(sinTam.stderr, /width y height/);
+});
+
+test('un modelo 3D que supera el presupuesto falla', () => {
+  const r = conMutacion((d) => writeFileSync(join(d, 'assets/mate-v1.glb'), Buffer.alloc(2 * 1024 * 1024)));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /el modelo 3D pesa .* KB \(máximo 1500\)/);
+});
+
+test('un modelo 3D inexistente falla', () => {
+  const r = conMutacion((d) => rmSync(join(d, 'assets/mate-v1.glb')));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /data-src no existe/);
+});
+
+test('un archivo sin versión en assets o vendor falla (caché de un año)', () => {
+  const r = conMutacion((d) => renameSync(join(d, 'assets/mate-v1.glb'), join(d, 'assets/mate.glb')));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /assets\/mate\.glb: se guarda un año en caché/);
+  const vendor = conMutacion((d) => writeFileSync(join(d, 'vendor/otro.min.js'), '//'));
+  assert.equal(vendor.status, 1);
+  assert.match(vendor.stderr, /vendor\/otro\.min\.js: se guarda un año/);
+});
+
+test('sin la licencia del visor falla', () => {
+  const r = conMutacion((d) => rmSync(join(d, 'vendor/model-viewer.LICENSE.txt')));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /falta model-viewer\.LICENSE\.txt/);
+});
+
+test('app.js con peticiones propias, almacenamiento o imports ajenos falla', () => {
+  const fetchear = conMutacion((d) => editar(d, 'app.js', (t) => t + "\nfetch('https://analitica.example/x');"));
+  assert.equal(fetchear.status, 1);
+  assert.match(fetchear.stderr, /app\.js usa fetch/);
+  const almacen = conMutacion((d) => editar(d, 'app.js', (t) => t + "\nlocalStorage.setItem('a','b');"));
+  assert.equal(almacen.status, 1);
+  const ajeno = conMutacion((d) => editar(d, 'app.js', (t) => t.replace('/vendor/model-viewer-4.4.0.min.js', 'https://cdn.example/mv.js')));
+  assert.equal(ajeno.status, 1);
+  assert.match(ajeno.stderr, /importa algo no permitido/);
 });
