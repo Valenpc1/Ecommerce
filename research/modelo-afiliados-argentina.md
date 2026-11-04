@@ -4,7 +4,7 @@ Fecha: 2026-11-04. Mercado: Argentina (tienda de Shopify en pesos).
 
 ## Límites de la evidencia (leer primero)
 
-- `www.mercadolibre.com.ar` y `www.shopify.com` **no resuelven desde este entorno** (host fuera de los dominios permitidos). No pude leer los términos oficiales de ningún programa de afiliados.
+- `www.mercadolibre.com.ar` y `www.shopify.com` **no resuelven desde este entorno** (host fuera de los dominios permitidos). No pude abrir las páginas oficiales. Los términos de Mercado Libre Afiliados los leí del texto que pegó el dueño el 2026-11-04: ver `research/terminos-afiliados-mercadolibre.md`. Los de Shopify siguen sin leer.
 - Todo lo que sigue viene de resúmenes de WebSearch: prensa y blogs, con fechas y precisión variables. Lo que no tiene fuente va marcado `[no verificado]`.
 - No hay datos cuantitativos de demanda por nicho, ni tráfico ni conversión propios.
 
@@ -27,9 +27,9 @@ Fecha: 2026-11-04. Mercado: Argentina (tienda de Shopify en pesos).
 | Apps de abastecimiento del App Store que sugiere la herramienta (Dropshipper-ai, Syncee AI Dropship, DropCommerce, Printful) | Proveedores de EE. UU., UE, Reino Unido y Canadá; hay que instalarlas, cobrar a un proveedor y atender entregas y reclamos desde la Argentina | Respuesta de la herramienta | Descartadas: exigen proveedor, tarjeta y atención, justo lo que no hay |
 | Shopify Collabs | Creadores limitados a EE. UU., Canadá y Reino Unido; algunas fuentes dicen que las altas están pausadas | [GemPages](https://gempages.net/de/blogs/shopify/shopify-collabs), [Omnisend](https://www.omnisend.com/blog/shopify-collabs/), [Archive](https://archive.com/blog/shopify-collabs) | No disponible |
 | Programa de afiliados de Shopify (comerciantes nuevos) | Bounty de hasta US$150 por referido que compre un plan completo; pagos y países con datos contradictorios | [Jotform](https://www.jotform.com/blog/best-shopify-affiliate-program/), [Funnelish](https://funnelish.com/blog/shopify-affiliate-program) `[no verificado]` | Descartado: términos y países sin verificar, competencia fuerte y no es un producto de consumo |
-| **Mercado Libre Afiliados** | Abierto a mayores de 18 con cuenta activa; sin costo; comisión **de hasta 15% según la categoría** (prensa argentina); el afiliado genera el enlace desde su cuenta; cobro por Mercado Pago; sin tope | [Mercado](https://mercado.com.ar/marketing/mercado-libre-lanzo-en-el-pais-su-programa-de-afiliados-y-creadores-con-comisiones-de-hasta-15), [Forbes Argentina](https://www.forbesargentina.com/negocios/mercado-libre-sale-caza-creator-economy-lanza-su-programa-afiliados-monetizar-recomendaciones-n87534), [iProfesional](https://www.iprofesional.com/economia/450376-programa-afiliados-mercado-libre-permite-ganar-15-por-ciento-sin-invertir-vender) | **Elegido** |
+| **Mercado Libre Afiliados** | Abierto a mayores de 18 con cuenta activa; sin costo de inscripción (pero los términos exigen inscripción fiscal y factura); comisión **de hasta 15% según la categoría** (prensa argentina); el afiliado genera el enlace desde su cuenta; cobro por Mercado Pago; sin tope | [Mercado](https://mercado.com.ar/marketing/mercado-libre-lanzo-en-el-pais-su-programa-de-afiliados-y-creadores-con-comisiones-de-hasta-15), [Forbes Argentina](https://www.forbesargentina.com/negocios/mercado-libre-sale-caza-creator-economy-lanza-su-programa-afiliados-monetizar-recomendaciones-n87534), [iProfesional](https://www.iprofesional.com/economia/450376-programa-afiliados-mercado-libre-permite-ganar-15-por-ciento-sin-invertir-vender) | **Elegido** |
 
-Por qué Mercado Libre: precios y envíos locales en pesos, sin aduana ni tipo de cambio, y la plataforma se ocupa del cobro, el envío, las devoluciones y la atención. Pendiente de verificar en los términos oficiales: que permitan enlaces en sitios web, cómo exigen avisar la comisión y la tabla de comisiones (la prensa dice que solo se ve dentro de la cuenta).
+Por qué Mercado Libre: precios y envíos locales en pesos, sin aduana ni tipo de cambio, y la plataforma se ocupa del cobro, el envío, las devoluciones y la atención. Los términos (texto pegado por el dueño) permiten sitios web y blogs como "medios" si se informan y Mercado Libre los aprueba, y exigen inscripción fiscal, factura y que la compra ocurra dentro de las 24 horas del clic. Sigue pendiente leer la tabla de comisiones (`/ayuda/27913`; la prensa dice que solo se ve dentro de la cuenta) y las obligaciones complementarias (`/ayuda/32818`), donde puede estar cómo avisar la comisión.
 
 ## Nichos evaluados
 
@@ -45,15 +45,17 @@ Por qué Mercado Libre: precios y envíos locales en pesos, sin aduana ni tipo d
 
 ## Ganancia esperada por venta
 
-`comisión = valor de la compra × porcentaje de la categoría`
+`comisión = (valor de la compra sin impuestos) × porcentaje de la categoría` (cláusula 5.1)
 
 - La prensa argentina habla de comisiones **de hasta 15%**. La tabla por categoría no está verificada.
-- Ejemplo ilustrativo (no una estimación): una compra de $60.000 con 15% serían $9.000 como máximo; con 5%, $3.000 `[no verificado]`.
+- Ejemplo ilustrativo (no una estimación, antes de descontar impuestos): una compra de $60.000 con 15% serían $9.000 como máximo; con 5%, $3.000 `[no verificado]`.
+- Solo cuentan compras de productos nuevos hechas dentro de las 24 horas del clic, sin devolución ni cancelación. El primer pago exige $500 acumulados y 3 compras de 3 compradores distintos.
 - No hay datos de visitas ni de conversión. Con contenido nuevo y sin publicidad, lo razonable es esperar **ingresos cero durante las primeras semanas** mientras el sitio se indexa `[no verificado]`.
 
 ## Riesgos principales
 
 - El tráfico de búsqueda tarda semanas o meses y el contenido sin experiencia propia compite con sitios grandes: puede no posicionar.
-- Si los términos oficiales no permiten enlaces en sitios web, este modelo cae y hay que cambiar de canal.
+- Los términos permiten sitios y blogs, pero **Mercado Libre decide a su exclusivo criterio** si admite al afiliado y si aprueba el medio (2.1, 3.2). Si rechaza el sitio, el modelo no cobra desde él y hay que cambiar de canal.
+- Requisito fiscal con plazos (30 y 60 días desde el alta) y, si el dueño no está inscripto, una cuota mensual fija como único costo posible.
 - No se puede medir ventas desde aquí: las lee el dueño en el panel de afiliados.
 - El nombre "Cebá" no se contrastó con negocios existentes.

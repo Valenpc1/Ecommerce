@@ -1,6 +1,6 @@
 # Reglas de pivote · modelo de afiliación con contenido indexable
 
-Estado: **ciclo 2, sin datos.** El sitio todavía no está publicado. Se aplica cuando haya números en `metrics/metrics.csv` (o que el dueño los pase por chat). Se decide sin pedir permiso y con **un solo cambio por ciclo**.
+Estado: **ciclo 2, sin datos.** El sitio ya está publicado (según la captura que pasó el dueño el 2026-11-04; yo no puedo abrirlo) pero aún no tiene tráfico medido. Se aplica cuando haya números en `metrics/metrics.csv` (o que el dueño los pase por chat). Se decide sin pedir permiso y con **un solo cambio por ciclo**.
 
 > **Todos los umbrales son hipótesis iniciales**, sin benchmarks verificados. Se recalibran con los primeros datos reales.
 
@@ -20,6 +20,7 @@ Ratios: **CTR de búsqueda** = clics ÷ impresiones. **Paso a Mercado Libre** = 
 
 | Semanas desde publicar | Qué se hace |
 |------------------------|-------------|
+| Antes de contar semanas | Tienen que estar listos: Search Console verificado y `sitemap.xml` enviado, el sitio declarado y aprobado como medio en el panel de afiliados y la situación fiscal en regla dentro de los plazos de 30 y 60 días. Si falta alguno, **las semanas no cuentan**: no hay ni indexación ni comisiones posibles |
 | 1 a 4 | No se decide nada: indexación. Solo se corrigen errores técnicos que informe Search Console |
 | 5 en adelante | Revisión cada 14 días con el árbol de abajo |
 
@@ -38,9 +39,14 @@ Ratios: **CTR de búsqueda** = clics ÷ impresiones. **Paso a Mercado Libre** = 
 
 Si pasan **12 semanas** con menos de 50 impresiones por semana, el nicho se archiva y se pasa al de reserva (accesorios de mascotas) o se repite la Fase 1. El gasto es $0: la pérdida máxima es tiempo.
 
-## 5. Si los términos oficiales no permiten el modelo
+## 5. Condiciones del programa (detalle en `research/terminos-afiliados-mercadolibre.md`)
 
-Si el programa no permite enlaces en sitios web o exige algo que el sitio no cumple, **se detiene la publicación** y se cambia de canal: el único cambio razonable es pasar el contenido a otro formato que sí permitan, algo que hay que decidir con el texto oficial a la vista.
+Con el texto de los términos que pegó el dueño: los sitios y blogs **están permitidos como "medios"**, pero hay que informarlos y Mercado Libre puede rechazarlos a su exclusivo criterio. Reglas:
+
+- **Si Mercado Libre rechaza el medio:** desde el sitio no hay comisiones posibles. El único cambio razonable es usar perfiles propios y activos en redes como medio, con las piezas de `content/materiales-redes.md` que publica el dueño. Se decide con el rechazo a la vista.
+- **Si pasan 60 días desde el alta sin la documentación fiscal** (30 días para Mercado Pago): Mercado Libre puede suspender y excluir, y esas ventas no se pagan. Va antes que cualquier cambio de contenido.
+- **Si Mercado Libre pide cambiar un enlace:** se reemplaza en `enlaces.js` dentro de las 24 horas.
+- **Si cambian los términos** (pueden hacerlo sin aviso) y dejan de permitir lo que el sitio hace, **se detiene la publicación** hasta decidir con el texto nuevo a la vista.
 
 ## 6. Registro de experimentos
 
