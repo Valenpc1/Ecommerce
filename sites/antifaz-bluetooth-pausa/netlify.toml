@@ -1,0 +1,15 @@
+# Despliegue en Netlify: sitio estático, sin build.
+# Arrastra esta carpeta (sites/antifaz-bluetooth-pausa) a https://app.netlify.com/drop
+# o conéctala por Git/CLI con publish = ".".
+
+[build]
+  publish = "."
+
+# Encabezados de seguridad básicos (se aplican con despliegue por Git o CLI).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

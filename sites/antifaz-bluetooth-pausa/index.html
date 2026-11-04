@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pausa · Antifaz Bluetooth para dormir</title>
+  <meta name="description" content="Antifaz Bluetooth que bloquea la luz y reproduce tu música desde el teléfono. Pídelo por formulario o por WhatsApp.">
+  <meta name="theme-color" content="#0b0d12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pausa · Antifaz Bluetooth para dormir">
+  <meta property="og:description" content="Duerme con música, sin auriculares. Bloquea la luz y se conecta por Bluetooth.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b0d12'/%3E%3Cpath d='M20 6a10 10 0 1 0 6 18A8 8 0 0 1 20 6z' fill='%23ffb547'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    /* Antes del primer pintado: activa las animaciones de entrada.
+       Si app.js no carga en 4 s, se muestra todo el contenido igualmente. */
+    document.documentElement.classList.add('js');
+    setTimeout(function () {
+      if (!window.__pausaReady) document.documentElement.classList.add('show-all');
+    }, 4000);
+  </script>
+</head>
+<body>
+  <a class="skip" href="#pedido">Ir al pedido</a>
+
+  <!-- Ilustración reutilizable del producto (se reemplaza con fotos reales: ver PRODUCT_IMAGES en app.js) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <mask id="pausa-moon-cut">
+      <rect x="-200" y="-200" width="1040" height="800" fill="#fff"/>
+      <circle cx="150" cy="60" r="26" fill="#000"/>
+    </mask>
+    <symbol id="pausa-mask" viewBox="0 0 640 400">
+      <path d="M-720 176h816v48h-816zM544 176h816v48H544z" style="fill:var(--surface-4)"/>
+      <path d="M64 200C64 120 168 84 320 96c152-12 256 24 256 104 0 90-86 122-166 104-38-8-58-36-90-36s-52 28-90 36C150 322 64 290 64 200z" style="fill:var(--surface-4)"/>
+      <ellipse cx="204" cy="198" rx="84" ry="60" style="fill:var(--surface-1-deep)"/>
+      <ellipse cx="436" cy="198" rx="84" ry="60" style="fill:var(--surface-1-deep)"/>
+      <path d="M300 134l40 32-20 18v-68l20 18-40 32" style="fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round;stroke-linejoin:round"/>
+      <circle cx="320" cy="226" r="8" style="fill:var(--accent)"/>
+      <circle cx="128" cy="68" r="30" mask="url(#pausa-moon-cut)" style="fill:var(--ink)"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="#top" aria-label="Pausa, inicio">Pausa</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#producto">Producto</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#preguntas">Preguntas</a>
+        <a class="btn btn-primary" href="#pedido" data-cta="header">Pedir</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Portada -->
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="reveal">Duerme con música</h1>
+      <div class="hero-body">
+        <div class="hero-copy">
+          <p class="lead reveal">Pausa es un antifaz Bluetooth que bloquea la luz y reproduce lo que elijas desde tu teléfono, sin auriculares en las orejas.</p>
+          <div class="hero-actions reveal">
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#pedido" data-cta="hero">Pedir mi antifaz</a>
+              <a class="btn btn-quiet" href="#pedido" data-wa="hero" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+            </div>
+            <p class="price-line"><strong data-price="1">$29.90</strong><span>Antifaz Bluetooth Pausa · envío incluido</span></p>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="art-slot drift" data-product-visual>
+            <svg class="mask-art" role="img" aria-label="Ilustración del antifaz Pausa con símbolo Bluetooth" viewBox="0 0 640 400"><use href="#pausa-mask"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento: características y precio -->
+    <section id="producto" class="wrap section" aria-labelledby="producto-title">
+      <div class="section-head">
+        <h2 id="producto-title" class="reveal">Pensado para la hora de dormir</h2>
+      </div>
+      <div class="bento">
+        <div class="bento-row">
+          <article class="tile tile-wide tile-music reveal">
+            <div class="tile-text">
+              <h3 class="tile-xl">Música sin auriculares</h3>
+              <p>Se conecta por Bluetooth a tu teléfono. Pon música, un podcast o sonidos para dormir sin nada apretándote la oreja.</p>
+            </div>
+            <div class="tile-art" data-product-visual aria-hidden="true">
+              <svg viewBox="0 0 640 400"><use href="#pausa-mask"/></svg>
+            </div>
+          </article>
+          <div class="bento-col">
+            <article class="tile tile-dark reveal">
+              <h3>Oscuridad total</h3>
+              <p>Cubre ojos y sienes y deja fuera la luz del cuarto, del tren o del avión.</p>
+            </article>
+            <article class="tile tile-raised reveal">
+              <h3>Carga por USB</h3>
+              <p>Un cable y a dormir. Sin pilas que cambiar.</p>
+            </article>
+          </div>
+        </div>
+        <div class="bento-row">
+          <article class="tile tile-narrow tile-use reveal">
+            <h3>Para cada situación</h3>
+            <ul class="uses">
+              <li>Viajes largos</li>
+              <li>Turnos de noche</li>
+              <li>Siestas de mediodía</li>
+              <li>Ciudades ruidosas</li>
+            </ul>
+          </article>
+          <article class="tile tile-wide tile-price reveal">
+            <div class="price-main">
+              <h3>Un solo precio, envío incluido</h3>
+              <p class="price-big" data-price="1">$29.90</p>
+              <p>Pago y entrega los coordinamos contigo por WhatsApp.</p>
+            </div>
+            <div class="price-aside">
+              <p class="price-pack"><span>Pack de 2 antifaces</span><strong data-price="2">$54.90</strong><span>Ahorras <span data-save="2">$4.90</span></span></p>
+              <a class="btn btn-dark" href="#pedido" data-cta="bento">Pedir ahora</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section id="como" class="wrap section" aria-labelledby="como-title">
+      <div class="section-head">
+        <h2 id="como-title" class="reveal">Así de simple</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal">
+          <h3>Conéctalo</h3>
+          <p>Enciéndelo y búscalo en los ajustes Bluetooth de tu teléfono, igual que unos auriculares.</p>
+        </li>
+        <li class="step reveal">
+          <h3>Póntelo</h3>
+          <p>Ajusta la banda hasta que quede cómodo y la luz desaparezca.</p>
+        </li>
+        <li class="step reveal">
+          <h3>Descansa</h3>
+          <p>Elige tu música o un podcast, deja el teléfono lejos de la cama y cierra los ojos.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Pedido (catálogo + carrito + formulario) -->
+    <section id="pedido" class="wrap section" aria-labelledby="pedido-title">
+      <div class="section-head">
+        <h2 id="pedido-title" class="reveal">Pide el tuyo</h2>
+        <p class="section-note reveal">Elige el pack, deja tus datos y te escribimos por WhatsApp para confirmar la dirección y la forma de pago.</p>
+      </div>
+
+      <div class="order-wrap">
+        <div class="order-side reveal">
+          <fieldset class="packs" id="packs">
+            <legend class="sr-only">Elige tu pack</legend>
+            <label class="pack is-selected">
+              <input type="radio" name="pack" value="1" checked>
+              <span class="pack-body">
+                <span class="pack-name">1 antifaz</span>
+                <span class="pack-price" data-price="1">$29.90</span>
+                <span class="pack-note">Para ti</span>
+              </span>
+            </label>
+            <label class="pack">
+              <input type="radio" name="pack" value="2">
+              <span class="pack-body">
+                <span class="pack-name">2 antifaces</span>
+                <span class="pack-price" data-price="2">$54.90</span>
+                <span class="pack-note">Ahorras <span data-save="2">$4.90</span> · ideal para regalar</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <div class="cart" aria-live="polite">
+            <h3>Tu pedido</h3>
+            <p class="cart-line"><span id="cart-line">1 × Antifaz Bluetooth Pausa</span><span id="cart-subtotal">$29.90</span></p>
+            <p class="cart-line cart-muted"><span>Envío</span><span>Incluido</span></p>
+            <p class="cart-line cart-total"><span>Total</span><span id="cart-total">$29.90</span></p>
+          </div>
+
+          <div class="after">
+            <h3>Qué pasa después</h3>
+            <ul>
+              <li>Te escribimos por WhatsApp para confirmar tu dirección.</li>
+              <li>Coordinamos contigo la forma de pago.</li>
+              <li>Despachamos tu antifaz y te avisamos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="order-main reveal">
+          <form id="order-form" class="order-form" novalidate>
+            <div class="row">
+              <div class="field">
+                <label for="o-nombre">Nombre y apellido</label>
+                <input class="input" id="o-nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="e-o-nombre">
+                <p class="error" id="e-o-nombre"></p>
+              </div>
+              <div class="field">
+                <label for="o-whatsapp">WhatsApp</label>
+                <input class="input" id="o-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="h-o-whatsapp e-o-whatsapp">
+                <p class="hint" id="h-o-whatsapp">Con código de país.</p>
+                <p class="error" id="e-o-whatsapp"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="o-ciudad">Ciudad</label>
+                <input class="input" id="o-ciudad" name="ciudad" type="text" autocomplete="address-level2" required aria-describedby="e-o-ciudad">
+                <p class="error" id="e-o-ciudad"></p>
+              </div>
+              <div class="field">
+                <label for="o-direccion">Dirección de entrega</label>
+                <input class="input" id="o-direccion" name="direccion" type="text" autocomplete="street-address" required aria-describedby="e-o-direccion">
+                <p class="error" id="e-o-direccion"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="o-notas">Notas <span class="opt">(opcional)</span></label>
+              <textarea class="input" id="o-notas" name="notas" rows="2" maxlength="300"></textarea>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label>No rellenar <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <div class="field">
+              <label class="check" for="o-consent">
+                <input id="o-consent" name="consent" type="checkbox" required aria-describedby="e-o-consent">
+                <span>Acepto que me escriban por WhatsApp para confirmar mi pedido y que usen mis datos solo para gestionarlo.</span>
+              </label>
+              <p class="error" id="e-o-consent"></p>
+            </div>
+            <p class="status" id="order-status" role="status" aria-live="polite"></p>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit" id="order-submit">Enviar pedido</button>
+              <a class="btn btn-quiet" href="#pedido" data-wa="order" target="_blank" rel="noopener">Pedir directo por WhatsApp</a>
+            </div>
+            <noscript><p class="status">Para enviar el formulario necesitas activar JavaScript. También puedes escribirnos por WhatsApp.</p></noscript>
+          </form>
+
+          <div class="confirm" id="order-confirm" hidden tabindex="-1">
+            <h3 id="confirm-title">Pedido recibido</h3>
+            <p id="confirm-text"></p>
+            <a class="btn btn-dark" id="confirm-wa" href="#pedido" data-wa="confirm" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preguntas -->
+    <section id="preguntas" class="wrap section" aria-labelledby="preguntas-title">
+      <div class="faq-wrap">
+        <div class="faq-head">
+          <h2 id="preguntas-title" class="reveal">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>¿Cómo funciona el pedido?</summary>
+            <p>Llenas el formulario o nos escribes por WhatsApp. Confirmamos dirección y forma de pago contigo y después despachamos tu antifaz.</p>
+          </details>
+          <details class="reveal">
+            <summary>¿Cuánto tarda en llegar?</summary>
+            <p>Depende de tu ciudad. Te damos el plazo exacto por WhatsApp antes de despachar. Si lo quieres de regalo, pídelo con tiempo.</p>
+          </details>
+          <details class="reveal">
+            <summary>¿Cómo se conecta al teléfono?</summary>
+            <p>Por Bluetooth, como unos auriculares: lo enciendes, lo buscas en los ajustes de tu teléfono y listo.</p>
+          </details>
+          <details class="reveal">
+            <summary>¿Cómo se carga?</summary>
+            <p>Por USB. Con un cable lo cargas desde un cargador de teléfono o un computador.</p>
+          </details>
+          <details class="reveal">
+            <summary>¿Y si llega con un defecto?</summary>
+            <p>Escríbenos por WhatsApp con una foto del problema y lo resolvemos: cambio o devolución de tu dinero.</p>
+          </details>
+          <details class="reveal">
+            <summary>¿Qué hacen con mis datos?</summary>
+            <p>Los usamos solo para gestionar tu pedido y escribirte por WhatsApp. No los vendemos ni los compartimos. Si quieres que los borremos, pídenoslo y lo hacemos.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Captura de leads -->
+    <section id="escribenos" class="wrap section" aria-labelledby="lead-title">
+      <div class="lead-tile reveal">
+        <div class="lead-copy">
+          <h2 id="lead-title">¿Prefieres que te escribamos?</h2>
+          <p>Deja tu WhatsApp y te contamos disponibilidad y plazos de entrega. Sin compromiso.</p>
+        </div>
+        <form id="lead-form" class="lead-form" novalidate>
+          <div class="field">
+            <label for="l-nombre">Nombre</label>
+            <input class="input" id="l-nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="e-l-nombre">
+            <p class="error" id="e-l-nombre"></p>
+          </div>
+          <div class="field">
+            <label for="l-whatsapp">WhatsApp</label>
+            <input class="input" id="l-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="h-l-whatsapp e-l-whatsapp">
+            <p class="hint" id="h-l-whatsapp">Con código de país.</p>
+            <p class="error" id="e-l-whatsapp"></p>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label>No rellenar <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <div class="field">
+            <label class="check" for="l-consent">
+              <input id="l-consent" name="consent" type="checkbox" required aria-describedby="e-l-consent">
+              <span>Acepto que me escriban por WhatsApp.</span>
+            </label>
+            <p class="error" id="e-l-consent"></p>
+          </div>
+          <p class="status" id="lead-status" role="status" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit" id="lead-submit">Quiero que me escriban</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-top">
+        <p class="foot-line">Hecho para descansar.<br><a href="#pedido" data-wa="footer" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></p>
+        <p class="foot-note">Imágenes ilustrativas; el modelo puede variar levemente.<br>© 2026 Pausa</p>
+      </div>
+      <p class="wordmark" aria-hidden="true">Pausa</p>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
