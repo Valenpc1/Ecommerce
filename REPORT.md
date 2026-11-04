@@ -5,6 +5,7 @@ El historial de los ciclos 0 y 1 (antifaz Bluetooth) está en `archivo/ciclo-0-a
 ## Resumen
 
 - **Modelo:** sin proveedor, sin contacto con el producto y sin publicidad propia, el dropshipping no es posible. El negocio es **afiliación con contenido indexable**: guías de compra de mate y termo que llevan a Mercado Libre. Shopify Collective no opera en el país ni la moneda de esta tienda; el antifaz quedó **ARCHIVED**.
+- **Productos de Shopify (re-verificado el 2026-11-04 por tu pregunta):** Collective, el único camino de Shopify con productos reales de otras marcas, respondió otra vez "does not operate in this store's country or currency" (tienda: Argentina, ARS, plan Basic). Las muestras de mock.shop son de relleno y la propia herramienta aclara que no son inventario de proveedores. `search_products` solo lee tu tienda: hoy tiene 1 producto, el antifaz archivado. Las 4 apps de abastecimiento que sugiere Shopify se instalan desde tu panel (yo no puedo): tres trabajan con proveedores de EE. UU., UE, Reino Unido y Canadá y la cuarta (Printful) es de impresión bajo demanda. Por eso el modelo sigue siendo afiliación.
 - **Sitio publicado:** tu captura muestra el sitio en línea (con la insignia de Netlify) y la portada 3D. Tiene tus 4 enlaces de afiliado, el dominio en `sitemap.xml`, `robots.txt` y `canonical`, y ahora el archivo de verificación de Google en la raíz.
 - **Términos de Mercado Libre (el texto que pegaste):** permiten sitios y blogs como "medios", **pero hay que declarar el sitio y que Mercado Libre lo apruebe, estar inscripto fiscalmente y facturar** (plazos de 30 y 60 días desde el alta). Una venta cuenta solo si es de un producto nuevo y ocurre **dentro de las 24 h del clic**. El primer cobro exige $500 y 3 compras de 3 compradores distintos. Detalle en `research/terminos-afiliados-mercadolibre.md`.
 - **Skill `mercadolibre-auto-research`:** la instalé con tu comando en un directorio aislado y la leí entera. **No sirve para esto**: tasa autos usados, no menciona afiliados ni termos y necesita navegar Mercado Libre, que está bloqueado acá. No quedó instalada en el proyecto.
@@ -31,7 +32,8 @@ El historial de los ciclos 0 y 1 (antifaz Bluetooth) está en `archivo/ciclo-0-a
 | Archivo de verificación de Google en la raíz, sin tocarlo | Es el método que elegiste en Search Console y Google solo acepta su contenido exacto |
 | Probar la skill solo en un directorio aislado y descartarla | No toca afiliados, termos ni mates; instalada en el proyecto ocuparía el contexto con instrucciones de otro propósito |
 | Netlify conectado al repositorio | Una sola vez; después cada push se publica solo |
-| No volver a llamar a Collective | La herramienta indica que la respuesta no cambia para esta tienda |
+| Probar Collective una vez más a pedido del dueño (2026-11-04) y no insistir | Misma respuesta que la primera vez; la herramienta indica que no va a cambiar para esta tienda |
+| No ejecutar los pasos de telemetría de la skill UCP de Shopify | Mandan tu mensaje textual y el id de sesión a Shopify; no los pediste y no hacen falta. Para desactivarlos de forma permanente, la propia skill indica crear el archivo vacío `~/.config/shopify-ai-toolkit/opt-out` o definir `OPT_OUT_INSTRUMENTATION=true`; no toqué ninguna configuración |
 
 ## 2. Qué se hizo
 
@@ -110,6 +112,7 @@ Además, **no compres ni hagas clics repetidos por tus propios enlaces**: esas c
 - **A dónde lleva cada `meli.la`** y que el orden asumido sea el correcto.
 - **La licencia vigente en Sketchfab** del modelo.
 - **Las guías:** contienen criterios generales de compra, sin fuente por cada línea y sin datos técnicos de productos. Conviene que una persona las lea una vez.
+- **Las apps de abastecimiento de Shopify:** si envían a Argentina, a qué costo y con qué plazos (apps.shopify.com y los sitios de los proveedores están bloqueados acá), y si Shopify Payments o un cobro local funciona en tu tienda.
 - **La demanda de mate y termo** y el nombre "Cebá".
 
 ## 6. Riesgos abiertos
@@ -132,4 +135,4 @@ Tienda conectada: plan Basic, Argentina, ARS. Solo se tocó lo creado por este p
 |--------|----------|----|--------------|
 | Archivar (no se borra) | Antifaz Bluetooth Pausa (`antifaz-bluetooth-pausa`) | `gid://shopify/Product/15530891018476` | ARCHIVED |
 
-Otras llamadas fueron solo lectura (`get-shop-info`, búsquedas de productos y una consulta GraphQL de verificación). La búsqueda en Collective devolvió que no opera para esta tienda y no se repitió. Shopify sugirió cuatro apps de abastecimiento del App Store (Dropshipper-ai, Syncee AI Dropship, DropCommerce y Printful); están descartadas porque exigen proveedor, tarjeta y atención de clientes.
+Otras llamadas fueron solo lectura (`get-shop-info`, búsquedas de productos y una consulta GraphQL de verificación). La búsqueda en Collective devolvió que no opera para esta tienda las dos veces que se probó (la segunda, el 2026-11-04, a pedido del dueño) y no se repetirá. Shopify sugirió cuatro apps de abastecimiento del App Store (Dropshipper-ai, Syncee AI Dropship, DropCommerce y Printful); están descartadas por criterio, no por una prueba: en general implican pagar al proveedor cada pedido, envío internacional a la Argentina y reclamos a tu cargo, justo lo que no querés, y la tienda seguiría sin tráfico porque no hay publicidad `[no verificado: los sitios de las apps están bloqueados acá]`. Se instalan desde el panel de Shopify, no desde acá. Aunque Collective funcionara, importar productos es una acción del comerciante con el botón de importar de la app de Collective: no tiene API para aceptar invitaciones ni lo puedo hacer yo (documentación de Shopify). La skill `shopify-plugin:ucp` es un kit para **comprar** en nombre de un cliente y el comando `ucp` no está instalado acá: no la usé.
