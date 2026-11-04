@@ -21,15 +21,15 @@ Ratios: **CTR de búsqueda** = clics ÷ impresiones. **Paso a Mercado Libre** = 
 | Semanas desde publicar | Qué se hace |
 |------------------------|-------------|
 | Antes de contar semanas | Tienen que estar listos: Search Console verificado y `sitemap.xml` enviado, el sitio declarado y aprobado como medio en el panel de afiliados y la situación fiscal en regla dentro de los plazos de 30 y 60 días. Si falta alguno, **las semanas no cuentan**: no hay ni indexación ni comisiones posibles |
-| 1 a 4 | No se decide nada: indexación. Solo se corrigen errores técnicos que informe Search Console |
+| 1 a 4 | No se decide ningún cambio de rumbo: es la etapa de indexación. Se sigue el plan de contenido de `PLAN.md` (1 o 2 guías nuevas por semana) y se corrigen los errores técnicos que informe Search Console |
 | 5 en adelante | Revisión cada 14 días con el árbol de abajo |
 
 ## 3. Árbol de decisión (la primera condición que se cumple manda)
 
 | # | Condición | Diagnóstico | Acción |
 |---|-----------|-------------|--------|
-| 1 | A las 3 semanas, menos de 3 páginas indexadas | Problema de descubrimiento | Revisar cobertura, `robots.txt`, `sitemap.xml` y enlaces internos. No tocar el contenido |
-| 2 | A las 5 semanas, con 3 páginas indexadas, menos de 100 impresiones | Poca demanda o mucha competencia en estos temas | Escribir 3 guías nuevas del mismo nicho con otras preguntas (búsquedas más específicas) |
+| 1 | A las 3 semanas, menos de 5 páginas indexadas (el sitemap lista 9) | Problema de descubrimiento | Revisar cobertura, `robots.txt`, `sitemap.xml` y enlaces internos. No tocar el contenido |
+| 2 | A las 5 semanas, con 5 o más páginas indexadas, menos de 100 impresiones | Poca demanda o mucha competencia en estos temas | Escribir 3 guías nuevas del mismo nicho con otras preguntas (búsquedas más específicas) |
 | 3 | 100 impresiones o más y CTR de búsqueda menor al 1% | Los títulos no atraen | Reescribir `title` y `description` de las páginas con más impresiones |
 | 4 | CTR de búsqueda de 1% o más y paso a Mercado Libre menor al 5% | La página no lleva al botón | Subir el bloque de compra, aclarar el texto del botón y la promesa |
 | 5 | 50 clics en enlaces de afiliado o más y ningún pedido en 14 días | Enlaces mal atribuidos, categoría con poca conversión o publicaciones poco convincentes | Revisar los enlaces uno por uno y pasar de búsquedas a publicaciones concretas |

@@ -5,8 +5,9 @@ El historial de los ciclos 0 y 1 (antifaz Bluetooth) está en `archivo/ciclo-0-a
 ## Resumen
 
 - **Modelo:** sin proveedor, sin contacto con el producto y sin publicidad propia, el dropshipping no es posible. El negocio es **afiliación con contenido indexable**: guías de compra de mate y termo que llevan a Mercado Libre. Shopify Collective no opera en el país ni la moneda de esta tienda; el antifaz quedó **ARCHIVED**.
+- **Plan (`PLAN.md`):** cuatro frentes en paralelo (contenido, SEO técnico, habilitar el cobro y medición) y una regla de no esperar: si algo se traba, sigo por otro camino. Tus tareas son tres y están paso a paso en la sección 5 del plan. Honestidad: el cuello de botella es el tráfico, no el sitio.
 - **Productos de Shopify (re-verificado el 2026-11-04 por tu pregunta):** Collective, el único camino de Shopify con productos reales de otras marcas, respondió otra vez "does not operate in this store's country or currency" (tienda: Argentina, ARS, plan Basic). Las muestras de mock.shop son de relleno y la propia herramienta aclara que no son inventario de proveedores. `search_products` solo lee tu tienda: hoy tiene 1 producto, el antifaz archivado. Las 4 apps de abastecimiento que sugiere Shopify se instalan desde tu panel (yo no puedo): tres trabajan con proveedores de EE. UU., UE, Reino Unido y Canadá y la cuarta (Printful) es de impresión bajo demanda. Por eso el modelo sigue siendo afiliación.
-- **Sitio publicado:** tu captura muestra el sitio en línea (con la insignia de Netlify) y la portada 3D. Tiene tus 4 enlaces de afiliado, el dominio en `sitemap.xml`, `robots.txt` y `canonical`, y ahora el archivo de verificación de Google en la raíz.
+- **Sitio publicado:** tu captura muestra el sitio en línea (con la insignia de Netlify) y la portada 3D; el mate aparece en otra pose que el póster, lo que indica que el visor 3D se activó en tu navegador. Hoy tiene **9 páginas** (el inicio y 8 guías), tus 4 enlaces de afiliado, el dominio en `sitemap.xml`, `robots.txt` y `canonical`, datos estructurados, imagen para compartir y el archivo de verificación de Google en la raíz.
 - **Términos de Mercado Libre (el texto que pegaste):** permiten sitios y blogs como "medios", **pero hay que declarar el sitio y que Mercado Libre lo apruebe, estar inscripto fiscalmente y facturar** (plazos de 30 y 60 días desde el alta). Una venta cuenta solo si es de un producto nuevo y ocurre **dentro de las 24 h del clic**. El primer cobro exige $500 y 3 compras de 3 compradores distintos. Detalle en `research/terminos-afiliados-mercadolibre.md`.
 - **Skill `mercadolibre-auto-research`:** la instalé con tu comando en un directorio aislado y la leí entera. **No sirve para esto**: tasa autos usados, no menciona afiliados ni termos y necesita navegar Mercado Libre, que está bloqueado acá. No quedó instalada en el proyecto.
 - **Ganancia por venta:** hasta 15% del valor de la compra, según la prensa `[no verificado]`; la tabla oficial por categoría falta. **Esperá ingresos cero durante las primeras semanas** mientras Google indexa el sitio y los pagos tardan más.
@@ -34,15 +35,19 @@ El historial de los ciclos 0 y 1 (antifaz Bluetooth) está en `archivo/ciclo-0-a
 | Netlify conectado al repositorio | Una sola vez; después cada push se publica solo |
 | Probar Collective una vez más a pedido del dueño (2026-11-04) y no insistir | Misma respuesta que la primera vez; la herramienta indica que no va a cambiar para esta tienda |
 | No ejecutar los pasos de telemetría de la skill UCP de Shopify | Mandan tu mensaje textual y el id de sesión a Shopify; no los pediste y no hacen falta. Para desactivarlos de forma permanente, la propia skill indica crear el archivo vacío `~/.config/shopify-ai-toolkit/opt-out` o definir `OPT_OUT_INSTRUMENTATION=true`; no toqué ninguna configuración |
+| Pasar de 4 a 9 páginas con temas que la gente busca (tipos de mate, curar un mate, limpiar un termo, termo original, bombillas) | Más superficie para que Google encuentre el sitio y un perfil más "activo y regular" para Mercado Libre. Cada guía sigue las mismas reglas de honestidad y reutiliza uno de los 4 enlaces |
+| Datos estructurados (JSON-LD), etiquetas para compartir con imagen propia y `lastmod` en el sitemap | Ayudan a Google y a los previews de WhatsApp. El autor y el editor son "Cebá" (no se inventa ninguna persona). Las reglas de coherencia las exige el verificador |
+| No esperar al dueño: tareas suyas en cola y trabajo propio en paralelo | Pediste que, si no puedo seguir por un camino, tome otro. Los desvíos están en `PLAN.md` |
 
 ## 2. Qué se hizo
 
 | Ruta | Contenido |
 |------|-----------|
-| `sites/guias-mate-termo/` | Sitio estático: `index.html` y tres guías, `styles.css`, `app.js`, `enlaces.js` (el único archivo que se edita para los enlaces), `robots.txt`, `sitemap.xml`, `netlify.toml` y `google4aef02e4b7763dd2.html` (verificación de Search Console) |
-| `sites/guias-mate-termo/assets/` | `mate-v1.glb` (853 KB), `mate-poster-v1.webp` (45 KB) y `LEEME.txt` con el crédito y los cambios |
+| `sites/guias-mate-termo/` | Sitio estático: `index.html` y ocho guías, `styles.css`, `app.js`, `enlaces.js` (el único archivo que se edita para los enlaces), `robots.txt`, `sitemap.xml`, `netlify.toml` y `google4aef02e4b7763dd2.html` (verificación de Search Console) |
+| `sites/guias-mate-termo/assets/` | `mate-v1.glb` (853 KB), `mate-poster-v1.webp` (45 KB), `og-ceba-v1.png` (imagen para compartir, 109 KB, generada en Chromium) y `LEEME.txt` con el crédito y los cambios |
 | `sites/guias-mate-termo/vendor/` | `model-viewer-4.4.0.min.js`, su licencia Apache-2.0 y `LEEME.txt` |
-| `scripts/verificar-sitio.mjs` y `.test.mjs` | Verificador (SEO, enlaces, aviso de comisión, honestidad, diseño, 3D, caché, privacidad y archivo de Google) y sus 25 pruebas |
+| `PLAN.md` | Plan maestro: estrategia, desvíos si algo se traba, calendario y las tres tareas del dueño paso a paso |
+| `scripts/verificar-sitio.mjs` y `.test.mjs` | Verificador (SEO, enlaces, aviso de comisión, honestidad, diseño, 3D, caché, privacidad, archivo de Google, etiquetas para compartir, JSON-LD y `lastmod`) y sus 27 pruebas |
 | `research/terminos-afiliados-mercadolibre.md` | Qué exigen los términos de Mercado Libre Afiliados, cláusula por cláusula, y cómo está Cebá frente a cada una |
 | `research/modelo-afiliados-argentina.md` | Auditoría de herramientas, mecanismos y nichos con fuentes |
 | `PIVOT_RULES.md` | Reglas de pivote con ciclos de 14 días (las de 48 horas no aplican a búsqueda orgánica) y condiciones del programa |
@@ -77,6 +82,8 @@ Las semanas **no empiezan a contar** hasta que estén listos Search Console (ver
 
 ## 4. Paquete de arranque: estado
 
+La versión corta y paso a paso, pensada para quien no es técnico, está en `PLAN.md` sección 5 (tres tareas). Esta tabla es el detalle.
+
 | # | Paso | Estado |
 |---|------|--------|
 | 1 | **Search Console, con la propiedad correcta.** Agregá una propiedad de tipo **Prefijo de la URL** con `https://ceba.netlify.app/` (la dirección del sitio, **no** la del sitemap) y verificá con **Archivo HTML**. El archivo `google4aef02e4b7763dd2.html` ya está en la raíz: abrí `https://ceba.netlify.app/google4aef02e4b7763dd2.html`, comprobá que muestre `google-site-verification: google4aef02e4b7763dd2.html` y recién ahí apretá *Verificar*. Después, en *Sitemaps*, escribí `sitemap.xml` y enviá. Si Google te da otro nombre de archivo, pasámelo | **En curso.** Subí el archivo (commit `59254e6`). Por tu mensaje, la propiedad parece haberse creado con `https://ceba.netlify.app/sitemap.xml/`, que no sirve: la propiedad es el sitio y el sitemap se envía después. Mi redacción anterior de este paso era ambigua |
@@ -93,12 +100,12 @@ Además, **no compres ni hagas clics repetidos por tus propios enlaces**: esas c
 
 **Verificado con evidencia:**
 
-- **Verificador en modo estricto:** 0 fallos y 0 avisos sobre el sitio real (enlaces cargados, dominio, `canonical`, crédito CC BY, pesos, nombres versionados, licencia del visor, archivo de Google con su contenido exacto, `app.js` sin peticiones propias, cookies ni almacenamiento).
-- **25 pruebas con mutaciones:** modifican el sitio a propósito y deben fallar: primera persona, precios, escasez, enlaces rotos, anclas, aviso visible, scripts externos, CSS prohibido, enlaces no `https`, página fuera del sitemap, `canonical` ausente, crédito incompleto, póster sin texto alternativo, modelo sobre el presupuesto o inexistente, archivos sin versión, visor sin licencia, `app.js` con `fetch`, almacenamiento o importaciones ajenas, y archivo de Google con contenido o nombre incorrecto. Todas pasan.
-- **Chromium (132 comprobaciones):** el modelo carga y el póster se desvanece; con ahorro de datos, sin WebGL, sin JavaScript y con el visor bloqueado queda el póster y no hay errores; con movimiento reducido no gira solo; consola limpia; solo se piden recursos del propio sitio y de Google Fonts; titulares en dos líneas o menos a 375, 820 y 1440 px; el comportamiento de los enlaces en cuatro escenarios.
-- **Tu captura del sitio publicado:** portada con el mate, tipografía y botones correctos. No distingue el póster del visor 3D activo.
+- **Verificador en modo estricto:** 0 fallos y 0 avisos sobre el sitio real (enlaces cargados, dominio, `canonical`, crédito CC BY, pesos, nombres versionados, licencia del visor, archivo de Google con su contenido exacto, etiquetas para compartir y JSON-LD válidos en las 9 páginas, `lastmod` coherente, `app.js` sin peticiones propias, cookies ni almacenamiento).
+- **27 pruebas con mutaciones:** modifican el sitio a propósito y deben fallar: primera persona, precios, escasez, enlaces rotos, anclas, aviso visible, scripts externos, CSS prohibido, enlaces no `https`, página fuera del sitemap, `canonical` ausente, crédito incompleto, póster sin texto alternativo, modelo sobre el presupuesto o inexistente, archivos sin versión, visor sin licencia, `app.js` con `fetch`, almacenamiento o importaciones ajenas, archivo de Google con contenido o nombre incorrecto, imagen para compartir ausente o inexistente, `og:url` distinto del `canonical`, JSON-LD roto o incoherente y `lastmod` distinto de `dateModified`. Todas pasan.
+- **Chromium (252 comprobaciones sobre las 9 páginas):** el modelo carga y el póster se desvanece (una espera fija de mi prueba era demasiado corta con WebGL por software, el póster tardó hasta 3 s en terminar de desvanecerse; ahora espera la condición y no un tiempo fijo); con ahorro de datos, sin WebGL, sin JavaScript y con el visor bloqueado queda el póster y no hay errores; con movimiento reducido no gira solo; consola limpia; solo se piden recursos del propio sitio y de Google Fonts; titulares en dos líneas o menos a 375, 820 y 1440 px; el comportamiento de los enlaces en cuatro escenarios.
+- **Tu captura del sitio publicado:** portada con el mate, tipografía y botones correctos. El mate aparece en otra pose que el póster (la bombilla inclinada hacia el otro lado), lo que indica que el visor 3D estaba activo y girando en tu navegador.
 - **Skill descartada con evidencia:** instalada con `npx skills add` en un directorio aislado (1 skill copiada) y leídos `SKILL.md`, `README.md`, `CLAUDE.md` y `build.sh`. El `.skill` empaquetado es idéntico a `SKILL.md`; este no contiene comandos de shell, credenciales ni direcciones fuera de Mercado Libre y del Banco Nación, y `build.sh` solo comprime `SKILL.md` en `/tmp`. Tiene 0 menciones de afiliados, comisiones, termos o mates. Su propio README deslinda responsabilidad por "posibles infracciones" a los términos de Mercado Libre.
-- **Defectos reales encontrados y corregidos:** la tabla de la guía de mates desbordaba la pantalla en móvil (424 px contra 375); `requestIdleCallback` recibía un número y el 3D **nunca cargaba**; y, por tu captura, los titulares tenían las palabras pegadas ("Elegí bien tu termo y tu mate" se leía casi sin espacios): la tipografía trae un espacio de 0,18 em y el tracking negativo lo dejaba en 0,135 em; medí en Chromium y ahora es 0,235 em, con las mismas líneas y sin desborde. Los tres están corregidos; los dos primeros tienen pruebas que los detectan.
+- **Defectos reales encontrados y corregidos:** la tabla de la guía de mates desbordaba la pantalla en móvil (424 px contra 375); `requestIdleCallback` recibía un número y el 3D **nunca cargaba**; y, por tu captura, los titulares tenían las palabras pegadas ("Elegí bien tu termo y tu mate" se leía casi sin espacios): la tipografía trae un espacio de 0,18 em y el tracking negativo lo dejaba en 0,135 em; medí en Chromium y ahora es 0,235 em, con las mismas líneas y sin desborde. Los tres están corregidos; los dos primeros tienen pruebas que los detectan. Además, al ampliar el sitio, Chromium encontró dos titulares nuevos de 3 líneas en el celular (mi regla es 2 como máximo): se acortaron y ahora las 9 páginas cumplen a 375, 820 y 1440 px.
 - **Contraste:** todos los pares de texto de la paleta superan 4,5:1.
 - **Shopify:** plan Basic, Argentina, ARS; el antifaz está ARCHIVED y la etiqueta sigue intacta.
 - **Publicación:** cada commit está en la rama remota y coincide con el local.
@@ -107,7 +114,8 @@ Además, **no compres ni hagas clics repetidos por tus propios enlaces**: esas c
 
 - **Los términos oficiales:** los leí del texto que pegaste, no de la página. Pueden estar incompletos o haber cambiado (pueden modificarse sin aviso, 7.1). Faltan tres páginas: comisiones, obligaciones complementarias y Brandbook.
 - **Que `ceba.netlify.app` sirva el archivo de Google** y que la verificación funcione: no puedo abrir el sitio. Lo comprobás vos abriendo la dirección del archivo.
-- **El 3D interactivo en un dispositivo real:** lo probé en Chromium con WebGL por software. Probá arrastrar el mate en tu navegador y en el celular.
+- **El 3D en celulares:** lo probé en Chromium con WebGL por software y tu captura indica que anduvo en tu navegador de escritorio, pero no lo vi en iPhone ni Android. Probá arrastrar el mate en el celular.
+- **Los datos estructurados:** el verificador comprueba que el JSON-LD sea válido y coherente con el `canonical`, el título y el sitemap, pero no los validé con la herramienta de pruebas de Google (bloqueada). Tampoco sé si Google los va a aprovechar.
 - **El peso real con compresión:** el visor y el modelo suman ≈1,9 MB sin comprimir; Netlify suele comprimir el JavaScript, pero no lo medí.
 - **A dónde lleva cada `meli.la`** y que el orden asumido sea el correcto.
 - **La licencia vigente en Sketchfab** del modelo.
@@ -117,7 +125,7 @@ Además, **no compres ni hagas clics repetidos por tus propios enlaces**: esas c
 
 ## 6. Riesgos abiertos
 
-- **Mercado Libre decide a su exclusivo criterio** si admite al afiliado y si aprueba el sitio como medio (2.1 y 3.2). Si lo rechaza, el sitio no cobra. Un sitio nuevo de 4 páginas puede parecer poco "activo y regular": conviene sumar guías con frecuencia.
+- **Mercado Libre decide a su exclusivo criterio** si admite al afiliado y si aprueba el sitio como medio (2.1 y 3.2). Si lo rechaza, el sitio no cobra. Un sitio nuevo de 9 páginas puede parecer poco "activo y regular": por eso el plan suma 1 o 2 guías por semana.
 - **Requisito fiscal con plazos.** Si pasan 60 días desde el alta sin la documentación, pueden suspender y esas ventas no se pagan. Si no estás inscripto, la cuota del monotributo puede superar las comisiones de los primeros meses y volver negativo **tu** flujo de caja.
 - **Ventana corta y pago lento.** Solo cuentan compras dentro de las 24 h del clic, de productos nuevos y sin devolución. El primer cobro necesita 3 compradores distintos y llega semanas después de la compra.
 - **SEO lento y competido.** Contenido genérico y sin experiencia propia contra sitios grandes: puede no posicionar. No prometo resultados.
