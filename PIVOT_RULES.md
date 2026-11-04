@@ -40,7 +40,7 @@ Regla de oro: **un solo cambio por ciclo de 48 h**, para saber qué funcionó. L
 
 ## 4. Escalera de cambios (lista para ejecutar)
 
-Los precios se cambian editando `CONFIG.PACKS` en `sites/antifaz-bluetooth-pausa/app.js`. El texto de los videos con precio hay que regrabarlo.
+Los precios se cambian en dos sitios, **en el mismo commit**: la variante en Shopify (si el producto existe allí) y `CONFIG.PACKS` en `sites/antifaz-bluetooth-pausa/app.js`. Después `node shopify/verificar-catalogo.mjs` debe terminar con código 0. El texto de los videos con precio hay que regrabarlo.
 
 ### 4.A Precio (nunca por debajo del 35% de margen)
 
@@ -82,7 +82,7 @@ Se usa **solo** cuando el árbol lo indica (fila 6 con la variante de precio C y
 
 1. Repetir la Fase 1 con búsquedas nuevas (no reutilizar el análisis de hoy).
 2. Reserva del análisis actual: herramienta gua sha (ver `research/analisis-producto.md`).
-3. Copiar `sites/antifaz-bluetooth-pausa/` a `sites/<nuevo-slug>/`, cambiar `PRODUCT`, `PACKS`, textos y la ilustración o fotos, y reutilizar el **mismo** Apps Script (la columna `producto` distingue los pedidos).
+3. Copiar `sites/antifaz-bluetooth-pausa/` a `sites/<nuevo-slug>/`, cambiar `PRODUCT`, `PACKS`, textos y la ilustración o fotos, y reutilizar el **mismo** Apps Script (la columna `producto` distingue los pedidos). Crear el producto nuevo en Shopify como DRAFT y pasar el anterior a ARCHIVED (solo si lo creaste tú con la etiqueta `darwin-commerce`; nunca borrar).
 4. Nuevo cálculo de precio con la fórmula `precio ≥ (costo + envío + comisiones) ÷ (1 − 0.35)`.
 5. Nuevo conjunto de 5 guiones.
 
