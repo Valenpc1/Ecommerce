@@ -1,0 +1,14 @@
+# Sitio estático sin build. Conéctalo una sola vez a este repositorio en Netlify:
+#   Base directory: sites/guias-mate-termo · Build command: (vacío) · Publish directory: .
+# A partir de ahí, cada push a la rama se publica solo.
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
