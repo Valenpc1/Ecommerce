@@ -6,8 +6,8 @@
  * y aparece el aviso de que puede haber una comisión.
  */
 window.ENLACES = {
-  termos: "[ENLACE_AFILIADO_TERMOS]",
-  mates: "[ENLACE_AFILIADO_MATES]",
-  equipos: "[ENLACE_AFILIADO_EQUIPOS]",
-  bombillas: "[ENLACE_AFILIADO_BOMBILLAS]"
+  termos: "https://meli.la/2v693i7",
+  mates: "https://meli.la/28WDfwr",
+  equipos: "https://meli.la/1avMQ9u",
+  bombillas: "https://meli.la/1jFeMn4"
 };

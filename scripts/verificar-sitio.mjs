@@ -63,6 +63,7 @@ const textoVisible = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ').
 
 /* ───── por página ───── */
 const titulos = new Set();
+const canonicales = new Map();
 const descripciones = new Set();
 for (const p of lista) {
   const ruta = rutaDe(p);
@@ -82,6 +83,10 @@ for (const p of lista) {
   else if (desc.length < 70 || desc.length > 170) fallo(`${et} meta description de ${desc.length} caracteres (entre 70 y 170)`);
   else if (descripciones.has(desc)) fallo(`${et} meta description repetida`);
   else { descripciones.add(desc); ok(`${et} meta description (${desc.length} car.)`); }
+
+  const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) ?? [])[1];
+  canonicales.set(ruta, canonical);
+  if (!canonical) fallo(`${et} falta <link rel="canonical">`); else ok(`${et} canonical`);
 
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1 === 1) ok(`${et} un solo h1`); else fallo(`${et} tiene ${h1} h1 (debe haber 1)`);
@@ -153,6 +158,10 @@ else {
   for (const p of lista) {
     const ruta = rutaDe(p);
     if (!locs.some((l) => l.endsWith(ruta) && (ruta !== '/' || /\/$/.test(l)))) fallo(`sitemap.xml no lista ${ruta}`);
+  }
+  for (const [ruta, canonical] of canonicales) {
+    if (canonical && !locs.includes(canonical)) fallo(`[${ruta}] el canonical (${canonical}) no coincide con ninguna URL del sitemap`);
+    if (canonical && /\[DOMINIO\]/.test(canonical)) aviso(`[${ruta}] el canonical conserva [DOMINIO]`);
   }
   if (/\[DOMINIO\]/.test(mapa)) aviso('sitemap.xml: falta reemplazar [DOMINIO] por el dominio real');
 }

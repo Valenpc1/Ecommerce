@@ -19,33 +19,35 @@ function conMutacion(mutar, extra = []) {
 }
 const editar = (dir, archivo, fn) => writeFileSync(join(dir, archivo), fn(readFileSync(join(dir, archivo), 'utf8')));
 const TERMO = 'como-elegir-un-termo-para-mate/index.html';
+const DOM = 'https://ceba.netlify.app';
 
-test('el sitio real pasa y avisa de los marcadores pendientes', () => {
-  const r = conMutacion(() => {});
+test('el sitio real pasa incluso en modo estricto y sin avisos', () => {
+  const r = conMutacion(() => {}, ['--estricto']);
   assert.equal(r.status, 0, r.stdout + r.stderr);
-  assert.match(r.stderr, /enlaces\.js: termos sigue pendiente/);
-  assert.match(r.stderr, /sitemap\.xml: falta reemplazar \[DOMINIO\]/);
+  assert.doesNotMatch(r.stderr, /AVISO/);
 });
 
-test('en modo estricto los avisos pendientes fallan', () => {
-  assert.equal(conMutacion(() => {}, ['--estricto']).status, 1);
+test('un enlace de afiliado pendiente avisa; en modo estricto falla', () => {
+  const mutar = (d) => editar(d, 'enlaces.js', (t) => t.replace('"https://meli.la/2v693i7"', '"[ENLACE_AFILIADO_TERMOS]"'));
+  const normal = conMutacion(mutar);
+  assert.equal(normal.status, 0, normal.stdout + normal.stderr);
+  assert.match(normal.stderr, /enlaces\.js: termos sigue pendiente/);
+  assert.equal(conMutacion(mutar, ['--estricto']).status, 1);
 });
 
-test('con enlaces reales y dominio, el modo estricto pasa', () => {
-  const r = conMutacion((d) => {
-    editar(d, 'enlaces.js', (t) => t.replace(/"\[ENLACE_AFILIADO_(\w+)\]"/g, '"https://enlace.example/$1"'));
-    editar(d, 'sitemap.xml', (t) => t.replaceAll('[DOMINIO]', 'https://ejemplo.netlify.app'));
-    editar(d, 'robots.txt', (t) => t.replaceAll('[DOMINIO]', 'https://ejemplo.netlify.app'));
-  }, ['--estricto']);
-  assert.equal(r.status, 0, r.stdout + r.stderr);
+test('un [DOMINIO] sin reemplazar en robots avisa; en estricto falla', () => {
+  const mutar = (d) => editar(d, 'robots.txt', (t) => t.replace(DOM, '[DOMINIO]'));
+  const normal = conMutacion(mutar);
+  assert.equal(normal.status, 0, normal.stdout + normal.stderr);
+  assert.match(normal.stderr, /robots\.txt: falta reemplazar \[DOMINIO\]/);
+  assert.equal(conMutacion(mutar, ['--estricto']).status, 1);
 });
 
 test('afirmar que se probó un producto falla; negarlo no', () => {
   const mal = conMutacion((d) => editar(d, TERMO, (t) => t.replace('<h2>Qué mirar en un termo</h2>', '<h2>Qué mirar en un termo</h2><p>Probé este termo durante un mes.</p>')));
   assert.equal(mal.status, 1);
   assert.match(mal.stderr, /afirma haber probado/);
-  const bien = conMutacion(() => {});
-  assert.doesNotMatch(bien.stderr, /afirma haber probado/);
+  assert.doesNotMatch(conMutacion(() => {}).stderr, /afirma haber probado/);
 });
 
 test('publicar un precio falla', () => {
@@ -103,15 +105,24 @@ test('CSS con grid o degradados falla', () => {
 });
 
 test('un enlace de afiliado que no es https falla', () => {
-  const r = conMutacion((d) => editar(d, 'enlaces.js', (t) => t.replace('"[ENLACE_AFILIADO_TERMOS]"', '"http://inseguro.example"')));
+  const r = conMutacion((d) => editar(d, 'enlaces.js', (t) => t.replace('"https://meli.la/2v693i7"', '"http://inseguro.example"')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /no es una URL https válida/);
 });
 
 test('una página fuera del sitemap falla', () => {
-  const r = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace(/<url><loc>\[DOMINIO\]\/mate-de-calabaza-o-de-acero\/<\/loc><\/url>\n?/, '')));
+  const r = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace(`<url><loc>${DOM}/mate-de-calabaza-o-de-acero/</loc></url>\n`, '')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /sitemap\.xml no lista \/mate-de-calabaza-o-de-acero\//);
+});
+
+test('un canonical ausente o distinto del sitemap falla', () => {
+  const sin = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/<link rel="canonical"[^>]*>\n/, '')));
+  assert.equal(sin.status, 1);
+  assert.match(sin.stderr, /falta <link rel="canonical">/);
+  const otro = conMutacion((d) => editar(d, TERMO, (t) => t.replace(`${DOM}/como-elegir-un-termo-para-mate/`, 'https://otro.example/termo/')));
+  assert.equal(otro.status, 1);
+  assert.match(otro.stderr, /el canonical .* no coincide con ninguna URL del sitemap/);
 });
 
 test('falta de lang o de meta description falla', () => {

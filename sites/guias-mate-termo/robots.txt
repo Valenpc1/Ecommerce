@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: [DOMINIO]/sitemap.xml
+Sitemap: https://ceba.netlify.app/sitemap.xml

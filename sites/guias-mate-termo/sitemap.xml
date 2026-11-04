@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>[DOMINIO]/</loc></url>
-  <url><loc>[DOMINIO]/como-elegir-un-termo-para-mate/</loc></url>
-  <url><loc>[DOMINIO]/mate-de-calabaza-o-de-acero/</loc></url>
-  <url><loc>[DOMINIO]/equipo-de-mate-que-necesitas/</loc></url>
+  <url><loc>https://ceba.netlify.app/</loc></url>
+  <url><loc>https://ceba.netlify.app/como-elegir-un-termo-para-mate/</loc></url>
+  <url><loc>https://ceba.netlify.app/mate-de-calabaza-o-de-acero/</loc></url>
+  <url><loc>https://ceba.netlify.app/equipo-de-mate-que-necesitas/</loc></url>
 </urlset>
