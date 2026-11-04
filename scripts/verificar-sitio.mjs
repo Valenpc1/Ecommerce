@@ -21,6 +21,7 @@ const aviso = (m) => { avisos++; console.warn('  AVISO ' + m); };
 
 if (!existsSync(raiz)) { console.error(`FALLO: no existe ${raiz}`); process.exit(1); }
 const leer = (p) => readFileSync(p, 'utf8');
+const peso = (ruta) => statSync(ruta).size / 1024;
 
 function paginas(dir) {
   let out = [];
@@ -65,6 +66,7 @@ const textoVisible = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ').
 const titulos = new Set();
 const canonicales = new Map();
 const descripciones = new Set();
+const modificados = new Map(); // canonical -> dateModified (debe coincidir con el lastmod del sitemap)
 for (const p of lista) {
   const ruta = rutaDe(p);
   const html = leer(p);
@@ -87,6 +89,66 @@ for (const p of lista) {
   const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) ?? [])[1];
   canonicales.set(ruta, canonical);
   if (!canonical) fallo(`${et} falta <link rel="canonical">`); else ok(`${et} canonical`);
+
+  // etiquetas para compartir (Open Graph) y datos estructurados (JSON-LD)
+  if (canonical) {
+    const og = (k) => (html.match(new RegExp(`<meta property="${k}" content="([^"]*)"`)) ?? [])[1];
+    const faltanOg = ['og:type', 'og:title', 'og:description', 'og:url', 'og:image', 'og:image:alt'].filter((k) => !og(k));
+    if (!/<meta name="twitter:card" content="[^"]+"/.test(html)) faltanOg.push('twitter:card');
+    if (faltanOg.length) fallo(`${et} faltan etiquetas para compartir: ${faltanOg.join(', ')}`);
+    else if (og('og:url') !== canonical) fallo(`${et} og:url (${og('og:url')}) no coincide con el canonical`);
+    else {
+      try {
+        const u = new URL(og('og:image'));
+        const archivo = join(raiz, u.pathname);
+        if (u.origin !== new URL(canonical).origin) fallo(`${et} og:image debe estar en ${new URL(canonical).origin}`);
+        else if (!existsSync(archivo)) fallo(`${et} og:image no existe en el sitio: ${u.pathname}`);
+        else if (peso(archivo) > 300) fallo(`${et} og:image pesa ${peso(archivo).toFixed(0)} KB (máximo 300)`);
+        else ok(`${et} etiquetas para compartir completas (imagen de ${peso(archivo).toFixed(0)} KB)`);
+      } catch { fallo(`${et} og:image no es una URL absoluta`); }
+    }
+
+    const entidades = [];
+    const scriptsLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    if (!scriptsLd.length) fallo(`${et} faltan los datos estructurados (JSON-LD)`);
+    for (const [, cuerpo] of scriptsLd) {
+      try {
+        const d = JSON.parse(cuerpo);
+        if (d['@context'] !== 'https://schema.org') fallo(`${et} JSON-LD sin "@context": "https://schema.org"`);
+        entidades.push(...(d['@graph'] ?? [d]));
+      } catch (e) { fallo(`${et} JSON-LD inválido: ${e.message}`); }
+    }
+    if (entidades.length) {
+      const buscar = (tipo) => entidades.find((e) => e && e['@type'] === tipo);
+      const h1txt = ((html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) ?? [])[1] ?? '').replace(/<[^>]+>/g, '').trim();
+      const formatoFecha = /^\d{4}-\d{2}-\d{2}$/;
+      if (ruta === '/') {
+        const sitio = buscar('WebSite');
+        if (!sitio) fallo(`${et} falta el JSON-LD WebSite`);
+        else if (sitio.url !== canonical || !sitio.name) fallo(`${et} el JSON-LD WebSite debe tener name y una url igual al canonical`);
+        else ok(`${et} JSON-LD WebSite válido`);
+      } else {
+        const art = buscar('Article');
+        const migas = buscar('BreadcrumbList');
+        const errores = [];
+        if (!art) errores.push('falta Article');
+        else {
+          if (art.mainEntityOfPage !== canonical) errores.push('mainEntityOfPage no coincide con el canonical');
+          if (art.headline !== h1txt) errores.push('headline distinto del h1');
+          if ((art.headline ?? '').length > 110) errores.push('headline de más de 110 caracteres');
+          if (!formatoFecha.test(art.datePublished ?? '') || !formatoFecha.test(art.dateModified ?? '') || art.dateModified < art.datePublished) errores.push('datePublished o dateModified inválidas');
+          if (!art.author?.name || !art.publisher?.name) errores.push('faltan author o publisher');
+          modificados.set(canonical, art.dateModified);
+        }
+        if (!migas) errores.push('falta BreadcrumbList');
+        else {
+          const items = migas.itemListElement ?? [];
+          if (items.length < 2 || items.some((it, i) => it.position !== i + 1) || items[items.length - 1].item !== canonical) errores.push('BreadcrumbList mal armada (posiciones o última URL distinta del canonical)');
+        }
+        if (errores.length) fallo(`${et} JSON-LD: ${errores.join('; ')}`); else ok(`${et} JSON-LD Article y BreadcrumbList válidos`);
+      }
+    }
+  }
 
   const h1 = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1 === 1) ok(`${et} un solo h1`); else fallo(`${et} tiene ${h1} h1 (debe haber 1)`);
@@ -140,7 +202,6 @@ for (const p of lista) {
 }
 
 /* ───── modelo 3D, activos y app.js ───── */
-const peso = (ruta) => statSync(ruta).size / 1024;
 const VERSIONADO = /-(v\d+|\d+\.\d+(?:\.\d+)?)(?:\.[a-z0-9]+)+$/i;
 const EXENTOS = /^(LEEME|.*LICENSE.*)\.txt$/i;
 for (const p of lista) {
@@ -223,6 +284,15 @@ if (!existsSync(rutaMapa)) fallo('falta sitemap.xml');
 else {
   const mapa = leer(rutaMapa);
   const locs = [...mapa.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const entradas = [...mapa.matchAll(/<url>\s*<loc>([^<]+)<\/loc>(?:\s*<lastmod>([^<]*)<\/lastmod>)?\s*<\/url>/g)].map((m) => ({ loc: m[1], lastmod: m[2] }));
+  for (const e of entradas) {
+    if (!e.lastmod) fallo(`sitemap.xml: falta <lastmod> en ${e.loc}`);
+    else if (!/^\d{4}-\d{2}-\d{2}$/.test(e.lastmod)) fallo(`sitemap.xml: lastmod inválido en ${e.loc}: ${e.lastmod}`);
+  }
+  for (const [canonical, modificada] of modificados) {
+    const e = entradas.find((x) => x.loc === canonical);
+    if (e?.lastmod && e.lastmod !== modificada) fallo(`sitemap.xml: el lastmod de ${canonical} (${e.lastmod}) no coincide con dateModified (${modificada})`);
+  }
   for (const p of lista) {
     const ruta = rutaDe(p);
     if (!locs.some((l) => l.endsWith(ruta) && (ruta !== '/' || /\/$/.test(l)))) fallo(`sitemap.xml no lista ${ruta}`);

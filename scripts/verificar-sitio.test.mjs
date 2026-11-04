@@ -111,7 +111,7 @@ test('un enlace de afiliado que no es https falla', () => {
 });
 
 test('una página fuera del sitemap falla', () => {
-  const r = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace(`<url><loc>${DOM}/mate-de-calabaza-o-de-acero/</loc></url>\n`, '')));
+  const r = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace(new RegExp(`  <url><loc>${DOM}/mate-de-calabaza-o-de-acero/</loc>[^\\n]*</url>\\n`), '')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /sitemap\.xml no lista \/mate-de-calabaza-o-de-acero\//);
 });
@@ -142,6 +142,33 @@ test('el archivo de verificación de Google debe tener el contenido exacto y su 
   const otro = conMutacion((d) => writeFileSync(join(d, 'google0123456789abcdef.html'), 'google-site-verification: google0123456789abcdef.html'), ['--estricto']);
   assert.equal(otro.status, 0, otro.stdout + otro.stderr);
   assert.match(otro.stdout, /google0123456789abcdef\.html: verificación de Search Console/);
+});
+
+test('etiquetas para compartir y datos estructurados incompletos o incoherentes fallan', () => {
+  const sinImagen = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/ *<meta property="og:image" [^>]*>\n/, '')));
+  assert.equal(sinImagen.status, 1);
+  assert.match(sinImagen.stderr, /faltan etiquetas para compartir: og:image/);
+  const imagenFantasma = conMutacion((d) => editar(d, TERMO, (t) => t.replace('/assets/og-ceba-v1.png"', '/assets/no-existe-v1.png"')));
+  assert.equal(imagenFantasma.status, 1);
+  assert.match(imagenFantasma.stderr, /og:image no existe en el sitio: \/assets\/no-existe-v1\.png/);
+  const urlDistinta = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/(<meta property="og:url" content=")[^"]*/, '$1https://otro.example/')));
+  assert.equal(urlDistinta.status, 1);
+  assert.match(urlDistinta.stderr, /og:url \(https:\/\/otro\.example\/\) no coincide con el canonical/);
+  const jsonRoto = conMutacion((d) => editar(d, TERMO, (t) => t.replace('"@type": "Article",', '"@type": "Article" ,,')));
+  assert.equal(jsonRoto.status, 1);
+  assert.match(jsonRoto.stderr, /JSON-LD inválido/);
+  const otraPagina = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/("mainEntityOfPage": ")[^"]*/, '$1https://ceba.netlify.app/otra/')));
+  assert.equal(otraPagina.status, 1);
+  assert.match(otraPagina.stderr, /JSON-LD: mainEntityOfPage no coincide con el canonical/);
+});
+
+test('el lastmod del sitemap debe existir y coincidir con dateModified', () => {
+  const distinto = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace(`<loc>${DOM}/como-curar-un-mate/</loc><lastmod>2026-11-04</lastmod>`, `<loc>${DOM}/como-curar-un-mate/</loc><lastmod>2026-10-01</lastmod>`)));
+  assert.equal(distinto.status, 1);
+  assert.match(distinto.stderr, /el lastmod de .*como-curar-un-mate\/ \(2026-10-01\) no coincide con dateModified \(2026-11-04\)/);
+  const ausente = conMutacion((d) => editar(d, 'sitemap.xml', (t) => t.replace('<lastmod>2026-11-04</lastmod>', '')));
+  assert.equal(ausente.status, 1);
+  assert.match(ausente.stderr, /falta <lastmod> en /);
 });
 
 /* ───── modelo 3D, activos y app.js ───── */
