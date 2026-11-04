@@ -62,7 +62,9 @@ Cuando termines una, escribime "listo 1", "listo 2"… Si te trabás, **mandame 
 **Tarea 3 · Fiscal (una respuesta).** Contestame solo esto: **¿ya tenés monotributo (o sos autónomo o responsable inscripto)? Sí / no / no sé.**
 - *Qué es:* un registro impositivo para trabajadores independientes que se hace online en ARCA (ex AFIP). Mercado Libre lo exige para pagarte y para que le mandes factura.
 - *Si es que sí:* no hay nada más que hacer.
-- *Si es que no:* hoy no hace falta hacer nada para construir ni para que el sitio funcione. Es obligatorio para cobrar y dentro de los 60 días desde tu alta, o Mercado Libre puede suspenderte. El monotributo tiene una cuota mensual fija aunque no vendas. Mi inclinación, que no es consejo profesional: no pagar cuotas fijas antes de ver las primeras visitas, y decidirlo con un contador antes de que venza el plazo. Si querés, te armo el mensaje para mandarle.
+- *Si es que no:* hoy no hace falta hacer nada para construir ni para que el sitio funcione. Es obligatorio para cobrar, y Mercado Libre pide la documentación fiscal dentro de los 60 días desde tu alta (si no, puede suspenderte). El monotributo tiene una cuota mensual fija aunque no vendas. Mi inclinación, que no es consejo profesional: no pagar cuotas fijas antes de ver las primeras visitas, y decidirlo con un contador antes de que venza el plazo. Si querés consultarlo, copiá y mandá este mensaje a un contador (no lleva ningún dato personal):
+
+> Hola, ¿cómo estás? Quiero empezar a cobrar comisiones del Programa de Afiliados de Mercado Libre por recomendar productos desde un sitio web. Me piden estar inscripto (monotributista, responsable inscripto o IVA exento) y enviarles factura para cobrar. Soy persona física y es un ingreso chico y variable al principio. ¿Me podés decir qué actividad y categoría me convienen, cuánto sería la cuota mensual, cuáles son los pasos para inscribirme y cómo emito la factura a Mercado Libre? Gracias.
 
 ## 6. Lo que no voy a hacer (aunque sea más fácil)
 
