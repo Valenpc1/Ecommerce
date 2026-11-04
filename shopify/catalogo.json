@@ -5,7 +5,7 @@
     {
       "handle": "antifaz-bluetooth-pausa",
       "titulo": "Antifaz Bluetooth Pausa",
-      "estado": "DRAFT",
+      "estado": "ARCHIVED",
       "etiquetas": ["darwin-commerce"],
       "variantes": [
         { "titulo": "1 antifaz", "precio": "57900.00", "costo": "18393.6" },
