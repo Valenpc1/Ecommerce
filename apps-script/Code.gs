@@ -95,7 +95,7 @@ function handleOrder_(b) {
   sheet.appendRow([
     new Date(), id, nombre, whatsapp,
     clean_(b.ciudad, 60), clean_(b.direccion, 160),
-    producto, cantidad, items[0].precio, total, clean_(b.moneda, 6) || 'USD',
+    producto, cantidad, items[0].precio, total, clean_(b.moneda, 6) || 'ARS',
     clean_(b.notas, 300),
     clean_(b.utm_source, 60), clean_(b.utm_campaign, 80), clean_(b.utm_content, 80),
     'nuevo'
@@ -134,7 +134,7 @@ function parseItems_(items) {
     var it = items[i] || {};
     var qty = Math.floor(Number(it.cantidad));
     var price = Number(it.precio);
-    if (!(qty >= 1 && qty <= 20) || !(price >= 0 && price < 100000)) return null;
+    if (!(qty >= 1 && qty <= 20) || !(price >= 0 && price < 1e9)) return null;
     var name = clean_(it.nombre, 80);
     if (!name) return null;
     out.push({ nombre: name, cantidad: qty, precio: round2_(price) });

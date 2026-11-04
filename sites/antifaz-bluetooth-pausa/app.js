@@ -9,12 +9,16 @@
     WHATSAPP_NUMBER: '[WHATSAPP_NUMBER]',
     // URL "/exec" de la aplicación web de Apps Script (ver apps-script/README.md)
     APPS_SCRIPT_URL: '[APPS_SCRIPT_URL]',
-    CURRENCY: 'USD',
+    // Moneda y precios: DEBEN coincidir con la tienda de Shopify (ver shopify/catalogo.json
+    // y `node shopify/verificar-catalogo.mjs`). Cámbialos en los dos sitios a la vez.
+    CURRENCY: 'ARS',
     CURRENCY_SYMBOL: '$',
+    LOCALE: 'es-AR',
+    DECIMALS: 0,
     // Packs del catálogo. unit = precio por unidad; total = qty × unit.
     PACKS: [
-      { id: '1', qty: 1, unit: 29.9, label: '1 antifaz' },
-      { id: '2', qty: 2, unit: 27.45, label: '2 antifaces' }
+      { id: '1', qty: 1, unit: 57900, label: '1 antifaz' },
+      { id: '2', qty: 2, unit: 53450, label: '2 antifaces' }
     ],
     // Fotos reales del producto (rutas dentro de la carpeta). Vacío = se usa la ilustración.
     PRODUCT_IMAGES: [],
@@ -31,7 +35,7 @@
   const waReady = () => !isPlaceholder(CONFIG.WHATSAPP_NUMBER) && waDigits().length >= 8 && waDigits().length <= 15;
   const waLink = (text) => `https://wa.me/${waDigits()}?text=${encodeURIComponent(text)}`;
 
-  const money = (n) => CONFIG.CURRENCY_SYMBOL + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const money = (n) => CONFIG.CURRENCY_SYMBOL + n.toLocaleString(CONFIG.LOCALE, { minimumFractionDigits: CONFIG.DECIMALS, maximumFractionDigits: CONFIG.DECIMALS });
   const round2 = (n) => Math.round(n * 100) / 100;
   const packById = (id) => CONFIG.PACKS.find((p) => p.id === String(id)) || CONFIG.PACKS[0];
   const packTotal = (p) => round2(p.qty * p.unit);

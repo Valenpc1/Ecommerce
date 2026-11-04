@@ -1,0 +1,16 @@
+{
+  "leido": "2026-11-04",
+  "moneda": "ARS",
+  "productos": [
+    {
+      "handle": "antifaz-bluetooth-pausa",
+      "titulo": "Antifaz Bluetooth Pausa",
+      "estado": "DRAFT",
+      "etiquetas": ["darwin-commerce"],
+      "variantes": [
+        { "titulo": "1 antifaz", "precio": "57900.00", "costo": "18393.6" },
+        { "titulo": "2 antifaces", "precio": "106900.00", "costo": "36787.2" }
+      ]
+    }
+  ]
+}
