@@ -81,6 +81,10 @@ h1, h2, h3 { text-wrap: balance; }
 h2 { font-size: var(--fs-h2); font-weight: 700; line-height: 1.12; letter-spacing: -0.03em; }
 h3 { font-size: var(--fs-h3); font-weight: 700; line-height: 1.25; letter-spacing: -0.015em; }
 .section > h2 { margin-bottom: clamp(24px, 3.5vw, 44px); }
+/* El espacio de la tipografía es angosto (0,18 em) y el tracking negativo de los titulares lo achica más: se compensa. */
+h1 { word-spacing: 0.1em; }
+h2, .tile--wide h3 { word-spacing: 0.08em; }
+h3 { word-spacing: 0.06em; }
 
 /* Bento (Flexbox puro) */
 .bento { display: flex; flex-wrap: wrap; gap: var(--gap); }
