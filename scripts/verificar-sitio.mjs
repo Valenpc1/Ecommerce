@@ -242,5 +242,11 @@ else {
 }
 if (!existsSync(join(raiz, 'netlify.toml'))) fallo('falta netlify.toml');
 
+/* Verificación de Search Console por archivo HTML: va en la raíz y Google solo acepta el contenido exacto. */
+for (const nombre of readdirSync(raiz).filter((n) => /^google[0-9a-f]{16}\.html$/.test(n))) {
+  if (leer(join(raiz, nombre)).trim() === `google-site-verification: ${nombre}`) ok(`${nombre}: verificación de Search Console con el contenido exacto`);
+  else fallo(`${nombre}: debe contener exactamente "google-site-verification: ${nombre}" (Google no acepta otro contenido ni otro nombre)`);
+}
+
 console.log(`\n${fallos} fallo(s), ${avisos} aviso(s)${estricto && avisos ? ' (modo estricto: los avisos cuentan como fallo)' : ''}.`);
 process.exit(fallos || (estricto && avisos) ? 1 : 0);

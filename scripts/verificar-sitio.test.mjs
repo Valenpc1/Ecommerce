@@ -130,6 +130,20 @@ test('falta de lang o de meta description falla', () => {
   assert.equal(conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/<meta name="description"[^>]*>/, ''))).status, 1);
 });
 
+test('el archivo de verificación de Google debe tener el contenido exacto y su mismo nombre', () => {
+  const real = conMutacion(() => {}, ['--estricto']);
+  assert.match(real.stdout, /google4aef02e4b7763dd2\.html: verificación de Search Console/);
+  const envuelto = conMutacion((d) => writeFileSync(join(d, 'google4aef02e4b7763dd2.html'), '<html>google-site-verification: google4aef02e4b7763dd2.html</html>'));
+  assert.equal(envuelto.status, 1);
+  assert.match(envuelto.stderr, /google4aef02e4b7763dd2\.html: debe contener exactamente/);
+  const renombrado = conMutacion((d) => renameSync(join(d, 'google4aef02e4b7763dd2.html'), join(d, 'google1111111111111111.html')));
+  assert.equal(renombrado.status, 1);
+  assert.match(renombrado.stderr, /google1111111111111111\.html: debe contener exactamente/);
+  const otro = conMutacion((d) => writeFileSync(join(d, 'google0123456789abcdef.html'), 'google-site-verification: google0123456789abcdef.html'), ['--estricto']);
+  assert.equal(otro.status, 0, otro.stdout + otro.stderr);
+  assert.match(otro.stdout, /google0123456789abcdef\.html: verificación de Search Console/);
+});
+
 /* ───── modelo 3D, activos y app.js ───── */
 test('el crédito CC BY incompleto del modelo 3D falla', () => {
   const r = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/Se modificó: texturas reducidas de tamaño\./, '')));
