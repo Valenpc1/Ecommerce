@@ -56,3 +56,23 @@ Otros nombres que aparecen en listas de noviembre (anillos de promesa, lockets c
 - [Sell The Trend · TikTok Shop](https://www.sellthetrend.com/reports/highest-engagement-tiktok-shop)
 - [Andrey Rojas · criterios producto ganador contra entrega LATAM](https://www.andreybusiness.com/blog/criterios-producto-ganador-contra-entrega-latam-2026)
 - [Thunderbit · estadísticas de dropshipping](https://thunderbit.com/es/blog/dropshipping-stats)
+
+## Actualización 2026-11-04 · mercado argentino
+
+La tienda de Shopify conectada está en Argentina y cobra en pesos (ARS). El análisis de arriba usa precios en dólares del mercado de EE. UU.; esta sección lo contrasta con el mercado local. Todo viene de resúmenes de WebSearch, con capturas sin fecha firme `[no verificado]`.
+
+| Referencia local | Precio en pesos |
+|------------------|-----------------|
+| [Gadnic AN2BT, Mercado Libre (rastreador)](https://mejorescompras.com.ar/precio/MLA27107757--auriculares-antifaz-para-dormir-gadnic-an2bt-refrigerante-bt-bloqueo-total-tela-suave-audio-privado) | $39.649 (mínimo histórico $36.399) |
+| [Gadnic AN2BT, Frávega](https://www.fravega.com/auriculares-antifaz-para-dormir-gadnic-an2bt-refrigerante-990069204/p) | $39.404 de lista |
+| [Dehuka "anti luz", Frávega](https://www.fravega.com/p/antifaz-mascara-para-dormir-cubre-ojos-con-auriculares-inalambricos-bluetooth-100-anti-luz-22554310/) | $35.128 |
+| [Dehuka refrigerante, Frávega](https://www.fravega.com/p/antifaz-auricular-para-dormir-refrigerante-bluetooth-dehuka-negro-22478724/) | $25.116 |
+| [Listados de Mercado Libre](https://listado.mercadolibre.com.ar/antifaz-para-meditacion) | $11.999, $19.000 y $22.410 |
+
+Banda local aproximada: **$12.000 a $40.000**.
+
+**Costos en pesos.** Tipo de cambio de planificación $1.920 por dólar (dólar tarjeta, [La Nación, 2 de diciembre de 2025](https://www.lanacion.com.ar/economia/dolar/dolar-blue-hoy-a-cuanto-cotiza-el-martes-2-de-diciembre-nid02122025/): la última cotización con fecha que encontré; hoy puede ser distinta). El costo estimado de $15.58 USD equivale a $29.914 y el piso de precio con 35% de margen a **$46.021**, es decir **1,15 veces el tope local**. Con el MEP de una captura sin fecha ([indicadores.ar](https://indicadores.ar/calculadora): $1.524) el piso sería de $36.529, cerca del tope.
+
+**Conclusión.** Con los costos estimados este producto no compite en Argentina sin sacrificar el margen del 35% o conseguir un costo menor (proveedor local o cotización más baja). Por eso el producto queda en DRAFT en Shopify y se aplica la regla 4.E de `PIVOT_RULES.md`.
+
+**Aduana.** Según la prensa (p. ej. [Cronista](https://www.cronista.com/economia-politica/courier-comercial-el-abc-para-importar-y-aprovechar-los-nuevos-beneficios)), la franquicia de US$400 y el tope de cinco compras al año son para compras personales; la reventa o la importación comercial entra por otro régimen que no pude confirmar. Consulta a un despachante de aduana o contador y averigua quién paga aranceles e IVA en el envío.

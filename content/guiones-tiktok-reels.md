@@ -1,6 +1,6 @@
 # Fase 3 · Atracción orgánica: 5 videos para TikTok, Reels y Shorts
 
-Producto: **Antifaz Bluetooth Pausa** · precio $29.90 · pack de 2 por $54.90 · envío incluido.
+Producto: **Antifaz Bluetooth Pausa** · precio $57.900 · pack de 2 por $106.900 (pesos argentinos, los de `CONFIG.PACKS`) · envío incluido.
 Todo es orgánico: gasto publicitario = $0.
 
 ## Antes de grabar (obligatorio, 30 minutos)
@@ -35,6 +35,7 @@ Los guiones afirman solo lo que cualquiera puede comprobar con el producto en la
 | Zona segura | Texto y producto fuera del 20% inferior y del 15% derecho (ahí va la interfaz de la app) |
 | Audio | Voz en off cercana (micrófono a 20 cm, cuarto sin eco) más sonido ambiente real |
 | Cierre | 2 s finales: fondo oscuro, producto, precio y "Link en mi perfil" |
+| Precio | Va solo como texto en el cierre, nunca en la voz: en pesos cambia seguido y así se actualiza sin regrabar el video |
 | Portada | 3 palabras grandes (la primera frase del gancho) sobre el fotograma más claro del video |
 
 ## Enlace con atribución
@@ -69,7 +70,7 @@ La hoja `Resumen` desglosa vistas, clics y pedidos por `utm_campaign`.
 | 4.0–7.0 | Plano medio: sacas el antifaz de su caja; macro de 1 s al símbolo Bluetooth | Antifaz con **Bluetooth** | "Esto es un antifaz que se conecta por Bluetooth a tu teléfono." |
 | 7.0–10.5 | Grabación de pantalla del teléfono: Ajustes → Bluetooth → aparece `[NOMBRE_BLUETOOTH]` → Conectado | Se conecta como unos auriculares | "Lo buscas en tu Bluetooth, igual que unos auriculares." |
 | 10.5–13.0 | Persona acostada de lado con el antifaz puesto; la mano apaga la lámpara | Música y **oscuridad** | "Música y oscuridad, sin nada apretándote la oreja." |
-| 13.0–15.0 | Pantalla final oscura con el producto | $29.90 · Link en mi perfil | "Link en mi perfil." |
+| 13.0–15.0 | Pantalla final oscura con el producto | $57.900 · Link en mi perfil | "Link en mi perfil." |
 
 **Caption:** Dormir de lado con auriculares duele. Esto lo resuelve. Link en mi perfil.
 **Hashtags:** #antifaz #antifazbluetooth #dormir #gadgets #hacksdeldia
@@ -90,7 +91,7 @@ La hoja `Resumen` desglosa vistas, clics y pedidos por `utm_campaign`.
 | 5.5–8.5 | Plano medio: te sientas en la cama y te pones el antifaz; macro de la banda ajustándose | Antifaz **Pausa** | "Yo uso esto: tapa la luz y reproduce sonidos desde mi teléfono." |
 | 8.5–12.0 | Pantalla del teléfono: reproduces sonido de lluvia en una app de audio; vuelta al plano de la persona acostada | Lluvia en tu teléfono, **oscuridad** en tus ojos | "Pongo lluvia o un podcast y el cuarto desaparece." |
 | 12.0–14.0 | Plano abierto: cuarto soleado, persona acostada y tranquila | Dormir de día, más fácil | "Dormir de día, más fácil." |
-| 14.0–16.0 | Pantalla final oscura con el producto | $29.90 · Link en mi perfil | "Link en mi perfil." |
+| 14.0–16.0 | Pantalla final oscura con el producto | $57.900 · Link en mi perfil | "Link en mi perfil." |
 
 **Caption:** Para quienes duermen de día: oscuridad y tu audio favorito en un solo antifaz. Link en mi perfil.
 **Hashtags:** #turnodenoche #enfermeria #trabajonocturno #antifaz #dormirdedia
@@ -113,7 +114,7 @@ La hoja `Resumen` desglosa vistas, clics y pedidos por `utm_campaign`.
 | 5.0–8.5 | Plano subjetivo: te lo pones; corte a la pantalla del teléfono conectando `[NOMBRE_BLUETOOTH]` | Conectas y listo | "Lo conecto al teléfono y pongo mi música." |
 | 8.5–12.0 | Plano lateral: cabeza reclinada con el antifaz puesto; el entorno ruidoso se ve borroso al fondo | Sin auriculares apretando | "Sin auriculares apretando la oreja en todo el viaje." |
 | 12.0–13.5 | Plano detalle: el cable USB cargándolo en la mesa del hotel o en casa | Se carga por USB | "Se carga por USB." |
-| 13.5–15.0 | Pantalla final oscura con el producto | $29.90 · Link en mi perfil | "Link en mi perfil." |
+| 13.5–15.0 | Pantalla final oscura con el producto | $57.900 · Link en mi perfil | "Link en mi perfil." |
 
 **Caption:** Mi truco para viajes largos: antifaz con música. Link en mi perfil.
 **Hashtags:** #viajes #tipsdeviaje #antifaz #gadgetsdeviaje #aeropuerto
@@ -125,21 +126,21 @@ La hoja `Resumen` desglosa vistas, clics y pedidos por `utm_campaign`.
 **Hipótesis:** el ángulo de regalo conecta con la temporada (Black Friday: 27 de noviembre; Navidad) y vende el pack de 2.
 **Duración:** 17 s.
 
-**Gancho (0–3 s):** unboxing en mesa con luz cálida y papel de regalo; texto "Regalo útil por menos de $30".
+**Gancho (0–3 s):** unboxing en mesa con luz cálida y papel de regalo; texto "Un regalo que sí se usa".
 
 | Tiempo | Plano | Texto en pantalla | Voz / audio |
 |--------|-------|-------------------|-------------|
-| 0.0–3.0 | Plano cenital: manos abren una caja sobre una mesa con papel de regalo y cinta | Regalo útil por menos de $30 | "Un regalo útil por menos de treinta dólares." |
+| 0.0–3.0 | Plano cenital: manos abren una caja sobre una mesa con papel de regalo y cinta | Un regalo que sí se usa | "Un regalo que sí se usa." |
 | 3.0–6.0 | Primer plano al sacar el antifaz; se le da vuelta para mostrar el símbolo Bluetooth | Antifaz **Bluetooth** | "Es un antifaz que reproduce tu música por Bluetooth." |
 | 6.0–9.5 | Plano medio de una persona probándoselo; reacción de sorpresa genuina (actuada, sin texto de reseña) | Música + oscuridad | "Música y oscuridad, para quien duerme poco o viaja mucho." |
-| 9.5–13.0 | Dos antifaces juntos sobre la mesa | Pack de 2: **$54.90** | "Hay pack de dos: uno para ti y otro para regalar." |
+| 9.5–13.0 | Dos antifaces juntos sobre la mesa | Pack de 2: **$106.900** | "Hay pack de dos: uno para ti y otro para regalar." |
 | 13.0–15.0 | Plano de la pantalla del teléfono con el formulario de la web | Pídelo en 1 minuto | "Lo pides en un minuto y coordinamos todo por WhatsApp." |
-| 15.0–17.0 | Pantalla final oscura | $29.90 · Pack de 2 $54.90 · Link en mi perfil | "Link en mi perfil." |
+| 15.0–17.0 | Pantalla final oscura | $57.900 · Pack de 2 $106.900 · Link en mi perfil | "Link en mi perfil." |
 
-**Caption:** Un regalo que sí se usa. Antifaz con Bluetooth, $29.90 o pack de 2 por $54.90. Link en mi perfil.
+**Caption:** Un regalo que sí se usa. Antifaz con Bluetooth, $57.900 o pack de 2 por $106.900. Link en mi perfil.
 **Hashtags:** #regalosnavidad #ideasderegalo #regalosutiles #blackfriday #antifaz
 
-*(Nota: el precio de $29.90 y el pack son los de `CONFIG.PACKS` en `app.js`. Si cambian, regraba el texto final.)*
+*(Nota: los precios son los de `CONFIG.PACKS` en `app.js` y los de Shopify. Si cambian, edita el texto final; no se dicen en voz alta.)*
 
 ---
 
@@ -156,7 +157,7 @@ La hoja `Resumen` desglosa vistas, clics y pedidos por `utm_campaign`.
 | 2.5–5.5 | Plano cenital: tapas la linterna con el antifaz; el brillo cae | Prueba real | "Pongo la linterna debajo del antifaz…" |
 | 5.5–8.5 | Plano fijo de 3 s con el antifaz encima de la linterna; se ve el resplandor que queda (lo que se vea, sin retocar) | Esto es lo que pasa | "…y esto es lo que se ve." |
 | 8.5–11.5 | Primer plano al antifaz puesto sobre la cara; texto "y además suena" sobre el símbolo Bluetooth | Y además **suena** | "Y además se conecta por Bluetooth a tu teléfono." |
-| 11.5–14.0 | Pantalla final oscura | $29.90 · Link en mi perfil | "Link en mi perfil." |
+| 11.5–14.0 | Pantalla final oscura | $57.900 · Link en mi perfil | "Link en mi perfil." |
 
 **Caption:** Prueba de la linterna: así tapa la luz el antifaz. Link en mi perfil.
 **Hashtags:** #antifaz #pruebas #gadgets #dormir #pruebadeproducto

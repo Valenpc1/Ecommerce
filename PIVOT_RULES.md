@@ -44,16 +44,18 @@ Los precios se cambian en dos sitios, **en el mismo commit**: la variante en Sho
 
 ### 4.A Precio (nunca por debajo del 35% de margen)
 
-Costo estimado por unidad: $15.58 = producto $9.58 + envío $3.50 + comisiones y fallos $2.50 `[estimaciones, validar con cotización real]`.
+La tienda de Shopify cobra en **pesos argentinos**, así que los precios se fijan en pesos. Costo estimado por unidad: $15.58 USD (producto $9.58 + envío $3.50 + comisiones y fallos $2.50) por un **tipo de cambio de planificación de $1.920 por dólar** (dólar tarjeta, captura del 2 de diciembre de 2025: la última con fecha que encontré) = $29.914. Todo `[no verificado]`. **Recalcula con el cambio real del día y la forma real de pago al proveedor antes de cada cambio de precio.**
 
 | Variante | Unidad | Pack de 2 | Margen unidad | Margen pack |
 |----------|--------|-----------|---------------|-------------|
-| A (actual) | $29.90 | $54.90 | 47.9% | 43.2% |
-| B | $26.90 | $49.90 | 42.1% | 37.6% |
-| C (piso) | $24.90 | $48.00 | 37.4% | 35.1% |
-| Prohibido | menos de $23.97 | menos de $47.94 | menos de 35% | menos de 35% |
+| A (actual) | $57.900 | $106.900 | 48.3% | 44.0% |
+| B | $52.900 | $97.900 | 43.5% | 38.9% |
+| C (piso) | $47.900 | $92.900 | 37.5% | 35.6% |
+| Prohibido | menos de $46.021 | menos de $92.042 | menos de 35% | menos de 35% |
 
-En `app.js`: variante B = `unit: 26.9` y pack de 2 `unit: 24.95`; variante C = `unit: 24.9` y pack de 2 `unit: 24.0`.
+En `app.js`: variante B = `unit: 52900` y pack de 2 `unit: 48950`; variante C = `unit: 47900` y pack de 2 `unit: 46450`. Los mismos valores van a las variantes de Shopify.
+
+Sensibilidad: si el dólar sube a $2.400, el margen de la unidad de la variante A baja al 35.4%.
 
 ### 4.B Copy de la portada
 
@@ -85,6 +87,16 @@ Se usa **solo** cuando el árbol lo indica (fila 6 con la variante de precio C y
 3. Copiar `sites/antifaz-bluetooth-pausa/` a `sites/<nuevo-slug>/`, cambiar `PRODUCT`, `PACKS`, textos y la ilustración o fotos, y reutilizar el **mismo** Apps Script (la columna `producto` distingue los pedidos). Crear el producto nuevo en Shopify como DRAFT y pasar el anterior a ARCHIVED (solo si lo creaste tú con la etiqueta `darwin-commerce`; nunca borrar).
 4. Nuevo cálculo de precio con la fórmula `precio ≥ (costo + envío + comisiones) ÷ (1 − 0.35)`.
 5. Nuevo conjunto de 5 guiones.
+
+### 4.E Antes de pasar un producto a ACTIVE en Shopify
+
+Además de las cuatro condiciones de `REPORT.md` sección 9:
+
+1. Recalcula costo y precio con el cambio real del día.
+2. Compara el precio con al menos 3 listados locales con fecha (Mercado Libre, Frávega u otros). **Si el piso del 35% supera el precio local más alto, no actives**: repite la Fase 1 con precios en pesos o busca un proveedor local.
+3. Confirma quién paga aranceles e IVA de importación y con qué régimen entra el envío.
+
+Estado hoy: el piso de la unidad ($46.021) supera el tope local encontrado ($40.000), así que **no se activa** sin una cotización de costo menor.
 
 ## 5. Condición de cierre ("evoluciona o muere")
 
