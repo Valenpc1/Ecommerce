@@ -6,7 +6,7 @@
 - **Precio:** $29.90 por unidad (margen estimado 47.9%, unos $14.32 por pedido) y pack de 2 por $54.90 (margen 43.2%). Envío incluido.
 - **Estado:** sitio estático listo para arrastrar a Netlify, backend de Google Sheets listo para pegar en Apps Script, 5 guiones de video y reglas numéricas de pivote.
 - **Lo que no puedo hacer yo:** pedir la muestra al proveedor (si su pasarela exige tarjeta física), crear la hoja y el Apps Script en tu cuenta de Google, subir la carpeta a Netlify y publicar los videos. Pasos exactos en la sección 5.
-- **Bloqueo técnico:** `git push` y la API de GitHub devolvieron 403 (la integración de esta sesión no tiene permiso de escritura en `Valenpc1/Ecommerce`). Hay **6 commits locales** en la rama `claude/darwin-commerce-agent-tk4q8o` pendientes de subir.
+- **Publicación:** la rama `claude/darwin-commerce-agent-tk4q8o` está subida a `Valenpc1/Ecommerce` (6 commits). El primer intento falló con 403 por falta de permiso de escritura; el reintento posterior funcionó.
 
 ## 1. Decisiones que tomé sin pedir permiso
 
@@ -88,14 +88,13 @@ Diseño: tema oscuro, Bento en Flexbox puro (ningún `display:grid`), Plus Jakar
 
 ## 5. Pasos manuales para ti, en orden
 
-1. **GitHub.** Conecta o reconecta tu cuenta en <https://claude.ai/connect-github> e instala la app de Claude en `Valenpc1/Ecommerce` (o pídeselo a un dueño de la organización) en <https://github.com/apps/claude/installations/select_target>. Luego dime "sube la rama" y ejecuto el push de los 6 commits. Si prefieres, abre una sesión nueva con el repositorio seleccionado.
-2. **Proveedor (tarjeta).** Pide cotización y **1 unidad de muestra** de un antifaz Bluetooth. Si la pasarela del proveedor exige tarjeta física, este es el paso que solo tú puedes hacer. Con la muestra, verifica la lista de `content/guiones-tiktok-reels.md` y actualiza costos en la tabla de la sección 2.
-3. **Google Sheets.** Sigue `apps-script/README.md` (5 pasos) y copia la URL `/exec`.
-4. **Configura el sitio.** En `sites/antifaz-bluetooth-pausa/app.js` reemplaza `[WHATSAPP_NUMBER]` (país y número, solo dígitos) y `[APPS_SCRIPT_URL]`.
-5. **Netlify.** Arrastra la carpeta `sites/antifaz-bluetooth-pausa` a <https://app.netlify.com/drop>. Copia el dominio resultante.
-6. **Prueba de punta a punta.** Haz un pedido de prueba: debe aparecer una fila en `Pedidos`, eventos en `Eventos`, y el botón de confirmación debe abrir WhatsApp. Borra las filas de prueba.
-7. **Videos.** Graba los 5 de `content/guiones-tiktok-reels.md` con tu muestra, reemplaza `[DOMINIO_NETLIFY]` y `[NOMBRE_BLUETOOTH]`, y publica uno por día con su enlace `utm_campaign`.
-8. **A las 48 horas** pásame las métricas de la sección 6.
+1. **Proveedor (tarjeta).** Pide cotización y **1 unidad de muestra** de un antifaz Bluetooth. Si la pasarela del proveedor exige tarjeta física, este es el paso que solo tú puedes hacer. Con la muestra, verifica la lista de `content/guiones-tiktok-reels.md` y actualiza costos en la tabla de la sección 2.
+2. **Google Sheets.** Sigue `apps-script/README.md` (5 pasos) y copia la URL `/exec`.
+3. **Configura el sitio.** En `sites/antifaz-bluetooth-pausa/app.js` reemplaza `[WHATSAPP_NUMBER]` (país y número, solo dígitos) y `[APPS_SCRIPT_URL]`.
+4. **Netlify.** Arrastra la carpeta `sites/antifaz-bluetooth-pausa` a <https://app.netlify.com/drop>. Copia el dominio resultante.
+5. **Prueba de punta a punta.** Haz un pedido de prueba: debe aparecer una fila en `Pedidos`, eventos en `Eventos`, y el botón de confirmación debe abrir WhatsApp. Borra las filas de prueba.
+6. **Videos.** Graba los 5 de `content/guiones-tiktok-reels.md` con tu muestra, reemplaza `[DOMINIO_NETLIFY]` y `[NOMBRE_BLUETOOTH]`, y publica uno por día con su enlace `utm_campaign`.
+7. **A las 48 horas** pásame las métricas de la sección 6.
 
 ## 6. Métricas que necesito para el siguiente pivote
 
