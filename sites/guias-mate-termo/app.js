@@ -52,12 +52,12 @@
       var mv = document.createElement('model-viewer');
       var atributos = {
         src: contenedor.getAttribute('data-src'),
-        alt: 'Modelo 3D de un mate uruguayo con bombilla. Arrastrá para girarlo.',
+        alt: 'Modelo 3D de un mate argentino con bombilla. Arrastrá para girarlo.',
         'camera-controls': '',
         'disable-zoom': '',
         'disable-pan': '',
         'touch-action': 'pan-y',
-        'camera-orbit': '30deg 76deg 92%',
+        'camera-orbit': '30deg 76deg 110%',
         'field-of-view': '28deg',
         'min-camera-orbit': 'auto 45deg auto',
         'max-camera-orbit': 'auto 100deg auto',

@@ -19,6 +19,20 @@ function conMutacion(mutar, extra = []) {
 }
 const editar = (dir, archivo, fn) => writeFileSync(join(dir, archivo), fn(readFileSync(join(dir, archivo), 'utf8')));
 const TERMO = 'como-elegir-un-termo-para-mate/index.html';
+// Reescribe el fragmento JSON de un .glb (y las longitudes) sin tocar los datos binarios.
+function parcharGlb(ruta, cambiar) {
+  const b = readFileSync(ruta);
+  const largo = b.readUInt32LE(12);
+  const json = JSON.parse(b.toString('utf8', 20, 20 + largo));
+  cambiar(json);
+  let nuevo = Buffer.from(JSON.stringify(json), 'utf8');
+  nuevo = Buffer.concat([nuevo, Buffer.alloc((4 - (nuevo.length % 4)) % 4, 0x20)]);
+  const cabecera = Buffer.from(b.subarray(0, 20));
+  cabecera.writeUInt32LE(nuevo.length, 12);
+  const todo = Buffer.concat([cabecera, nuevo, b.subarray(20 + largo)]);
+  todo.writeUInt32LE(todo.length, 8);
+  writeFileSync(ruta, todo);
+}
 const DOM = 'https://ceba.netlify.app';
 
 test('el sitio real pasa incluso en modo estricto y sin avisos', () => {
@@ -148,7 +162,7 @@ test('etiquetas para compartir y datos estructurados incompletos o incoherentes 
   const sinImagen = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/ *<meta property="og:image" [^>]*>\n/, '')));
   assert.equal(sinImagen.status, 1);
   assert.match(sinImagen.stderr, /faltan etiquetas para compartir: og:image/);
-  const imagenFantasma = conMutacion((d) => editar(d, TERMO, (t) => t.replace('/assets/og-ceba-v1.png"', '/assets/no-existe-v1.png"')));
+  const imagenFantasma = conMutacion((d) => editar(d, TERMO, (t) => t.replace('/assets/og-ceba-v2.png"', '/assets/no-existe-v1.png"')));
   assert.equal(imagenFantasma.status, 1);
   assert.match(imagenFantasma.stderr, /og:image no existe en el sitio: \/assets\/no-existe-v1\.png/);
   const urlDistinta = conMutacion((d) => editar(d, TERMO, (t) => t.replace(/(<meta property="og:url" content=")[^"]*/, '$1https://otro.example/')));
@@ -173,16 +187,39 @@ test('el lastmod del sitemap debe existir y coincidir con dateModified', () => {
 
 /* ───── modelo 3D, activos y app.js ───── */
 test('el crédito CC BY incompleto del modelo 3D falla', () => {
-  const r = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/Se modificó: texturas reducidas de tamaño\./, '')));
+  const r = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/Se modificó:[^<]*/, '')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /falta en el crédito del modelo 3D: el aviso de modificaciones/);
-  const sinAutor = conMutacion((d) => editar(d, 'index.html', (t) => t.replaceAll('Ermolli', 'alguien')));
+  const sinAutor = conMutacion((d) => editar(d, 'index.html', (t) => t.replaceAll('fervinas', 'alguien')));
   assert.equal(sinAutor.status, 1);
-  assert.match(sinAutor.stderr, /el autor \(Ermolli\)/);
+  assert.match(sinAutor.stderr, /el autor \(fervinas\)/);
+  const otraFuente = conMutacion((d) => editar(d, 'index.html', (t) => t.replace('mate-argentino-lowpoly-free-download-65686b57aa5f4df5ac624368a28def99', 'otro-modelo')));
+  assert.equal(otraFuente.status, 1);
+  assert.match(otraFuente.stderr, /el enlace a la fuente/);
+});
+
+test('un modelo 3D con licencia no admitida o sin metadatos falla', () => {
+  const noComercial = conMutacion((d) => parcharGlb(join(d, 'assets/mate-v2.glb'), (j) => { j.asset.extras.license = 'CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)'; }));
+  assert.equal(noComercial.status, 1);
+  assert.match(noComercial.stderr, /la licencia del modelo 3D \(CC-BY-NC-4\.0\) no está entre las admitidas/);
+  const sinMetadatos = conMutacion((d) => parcharGlb(join(d, 'assets/mate-v2.glb'), (j) => { delete j.asset.extras; }));
+  assert.equal(sinMetadatos.status, 1);
+  assert.match(sinMetadatos.stderr, /no trae author, license y source/);
+  const otroAutor = conMutacion((d) => parcharGlb(join(d, 'assets/mate-v2.glb'), (j) => { j.asset.extras.author = 'otra persona (https://sketchfab.com/otra)'; }));
+  assert.equal(otroAutor.status, 1);
+  assert.match(otroAutor.stderr, /el autor \(otra persona\)/);
+});
+
+test('un modelo 3D con las piezas sólidas en modo transparente falla (se tapan al girar)', () => {
+  const r = conMutacion((d) => parcharGlb(join(d, 'assets/mate-v2.glb'), (j) => { j.materials.find((m) => m.name === 'Mate').alphaMode = 'BLEND'; }));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /dibuja \d+ piezas en modo transparente \(BLEND\)/);
+  const real = conMutacion(() => {}, ['--estricto']);
+  assert.match(real.stdout, /modelo 3D con 1 pieza\(s\) transparente\(s\): las sólidas son opacas/);
 });
 
 test('un póster sin texto alternativo o sin tamaño falla', () => {
-  const sinAlt = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/ alt="Mate uruguayo[^"]*"/, ' alt=""')));
+  const sinAlt = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(/ alt="Mate argentino[^"]*"/, ' alt=""')));
   assert.equal(sinAlt.status, 1);
   assert.match(sinAlt.stderr, /texto alternativo descriptivo/);
   const sinTam = conMutacion((d) => editar(d, 'index.html', (t) => t.replace(' width="1024" height="1024"', '')));
@@ -191,19 +228,19 @@ test('un póster sin texto alternativo o sin tamaño falla', () => {
 });
 
 test('un modelo 3D que supera el presupuesto falla', () => {
-  const r = conMutacion((d) => writeFileSync(join(d, 'assets/mate-v1.glb'), Buffer.alloc(2 * 1024 * 1024)));
+  const r = conMutacion((d) => writeFileSync(join(d, 'assets/mate-v2.glb'), Buffer.alloc(2 * 1024 * 1024)));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /el modelo 3D pesa .* KB \(máximo 1500\)/);
 });
 
 test('un modelo 3D inexistente falla', () => {
-  const r = conMutacion((d) => rmSync(join(d, 'assets/mate-v1.glb')));
+  const r = conMutacion((d) => rmSync(join(d, 'assets/mate-v2.glb')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /data-src no existe/);
 });
 
 test('un archivo sin versión en assets o vendor falla (caché de un año)', () => {
-  const r = conMutacion((d) => renameSync(join(d, 'assets/mate-v1.glb'), join(d, 'assets/mate.glb')));
+  const r = conMutacion((d) => renameSync(join(d, 'assets/mate-v2.glb'), join(d, 'assets/mate.glb')));
   assert.equal(r.status, 1);
   assert.match(r.stderr, /assets\/mate\.glb: se guarda un año en caché/);
   const vendor = conMutacion((d) => writeFileSync(join(d, 'vendor/otro.min.js'), '//'));

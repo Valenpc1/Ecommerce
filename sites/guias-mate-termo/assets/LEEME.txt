@@ -1,8 +1,19 @@
-Modelo 3D "Mate Uruguayo." de Ermolli (https://sketchfab.com/ermolli)
-Fuente: https://sketchfab.com/3d-models/mate-uruguayo-e2fd6553b7b144f8afe2dc51929f95a3
+Modelo 3D "Mate argentino - lowpoly - free download" de fervinas (https://sketchfab.com/fervinas)
+Fuente: https://sketchfab.com/3d-models/mate-argentino-lowpoly-free-download-65686b57aa5f4df5ac624368a28def99
 Licencia: Creative Commons Atribución 4.0 (https://creativecommons.org/licenses/by/4.0/)
 
-Cambios realizados: las texturas se redujeron a un máximo de 1024 px y se convirtieron a WebP
-(el archivo pasó de 8,3 MB a 0,85 MB); la malla no se modificó. Los archivos son:
-  mate-v1.glb          modelo optimizado
-  mate-poster-v1.webp  imagen del modelo renderizada desde mate-v1.glb
+Cambios realizados (el autor y la licencia siguen en los metadatos del archivo):
+  - Las 3 texturas de 2048 px en PNG (unos 10 MB) pasaron a WebP de 1024 px (unos 320 KB).
+  - La jerarquía de nodos se aplanó, el modelo se centró y se escaló a 2 unidades de alto
+    (la escala original era diminuta) y esas transformaciones se aplicaron a los vértices.
+  - Se quitaron 9 juegos de coordenadas UV que ningún material usaba y los índices pasaron a 16 bits.
+  - Los datos de la malla se cuantizaron (extensión KHR_mesh_quantization).
+  - El material, que estaba entero en modo de transparencia (BLEND) y dibujaba las piezas en el
+    orden equivocado, se separó: las piezas sólidas son opacas y solo el disco interior de 28 % de
+    opacidad que el autor dejó translúcido conserva la transparencia.
+  - La forma de las piezas no se tocó.
+
+Archivos:
+  mate-v2.glb          modelo optimizado
+  mate-poster-v2.webp  imagen del modelo renderizada desde mate-v2.glb (la que se ve antes de que cargue el 3D)
+  og-ceba-v2.png       imagen para compartir el sitio (1200x630), con ese póster

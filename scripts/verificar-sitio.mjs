@@ -23,6 +23,27 @@ if (!existsSync(raiz)) { console.error(`FALLO: no existe ${raiz}`); process.exit
 const leer = (p) => readFileSync(p, 'utf8');
 const peso = (ruta) => statSync(ruta).size / 1024;
 
+// Licencias de modelos 3D que permiten uso comercial y que se saben acreditar bien. Cualquier otra falla a propósito.
+const LICENCIAS = {
+  'CC-BY-4.0': { nombre: 'CC BY 4.0', texto: /CC BY 4\.0/, enlace: /creativecommons\.org\/licenses\/by\/4\.0/, exigeAvisoDeCambios: true },
+  'CC0-1.0': { nombre: 'CC0', texto: /CC0/, enlace: /creativecommons\.org\/publicdomain\/zero\/1\.0/, exigeAvisoDeCambios: false }
+};
+// Primer fragmento (JSON) de un .glb, o null si no se puede leer.
+function leerGlb(ruta) {
+  try {
+    const b = readFileSync(ruta);
+    if (b.toString('ascii', 0, 4) !== 'glTF' || b.toString('ascii', 16, 20) !== 'JSON') return null;
+    return JSON.parse(b.toString('utf8', 20, 20 + b.readUInt32LE(12)));
+  } catch { return null; }
+}
+// asset.extras (author, license, source, title) de un glTF, o null si falta algo.
+const metadatosGlb = (json) => (json?.asset?.extras?.author && json.asset.extras.license && json.asset.extras.source ? json.asset.extras : null);
+// Piezas que se dibujan en modo transparente (BLEND). Con más de una, las piezas sólidas se tapan unas a otras en el orden equivocado al girar.
+const piezasTransparentes = (json) => {
+  const mezcla = new Set((json?.materials ?? []).flatMap((m, i) => (m.alphaMode === 'BLEND' ? [i] : [])));
+  return (json?.meshes ?? []).flatMap((m) => m.primitives).filter((p) => mezcla.has(p.material)).length;
+};
+
 function paginas(dir) {
   let out = [];
   for (const nombre of readdirSync(dir)) {
@@ -225,15 +246,33 @@ for (const p of lista) {
     if (!/width="\d+"/.test(poster[1]) || !/height="\d+"/.test(poster[1])) fallo(`${et} el póster necesita width y height`);
   }
 
-  const faltan = [
-    [/Ermolli/, 'el autor (Ermolli)'],
-    [/sketchfab\.com\/3d-models\/mate-uruguayo-e2fd6553b7b144f8afe2dc51929f95a3/, 'el enlace a la fuente'],
-    [/CC BY 4\.0/, 'la licencia (CC BY 4.0)'],
-    [/creativecommons\.org\/licenses\/by\/4\.0/, 'el enlace a la licencia'],
-    [/modific/i, 'el aviso de modificaciones']
-  ].filter(([re]) => !re.test(html)).map(([, nombre]) => nombre);
-  if (faltan.length) fallo(`${et} falta en el crédito del modelo 3D: ${faltan.join(', ')}`);
-  else ok(`${et} crédito CC BY 4.0 completo`);
+  // El crédito se compara con los metadatos del propio GLB (autor, fuente y licencia): sirve para cualquier modelo y
+  // rechaza licencias que no permiten un sitio con comisiones.
+  if (src && existsSync(glb)) {
+    const json = leerGlb(glb);
+    const transparentes = piezasTransparentes(json);
+    if (transparentes > 1) fallo(`${et} el modelo 3D dibuja ${transparentes} piezas en modo transparente (BLEND): se tapan unas a otras en el orden equivocado al girar; las piezas sólidas deben ser opacas`);
+    else ok(`${et} modelo 3D con ${transparentes} pieza(s) transparente(s): las sólidas son opacas`);
+    const meta = metadatosGlb(json);
+    if (!meta) fallo(`${et} el modelo 3D no trae author, license y source en asset.extras: sin eso no se puede acreditar`);
+    else {
+      const idLicencia = String(meta.license).split(/\s+/)[0];
+      const lic = LICENCIAS[idLicencia];
+      if (!lic) fallo(`${et} la licencia del modelo 3D (${idLicencia}) no está entre las admitidas para un sitio comercial: ${Object.keys(LICENCIAS).join(', ')}`);
+      else {
+        const autor = String(meta.author).replace(/\s*\(.*\)\s*$/, '').trim();
+        const faltan = [
+          [new RegExp(autor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `el autor (${autor})`],
+          [new RegExp(String(meta.source).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), 'el enlace a la fuente'],
+          [lic.texto, `la licencia (${lic.nombre})`],
+          [lic.enlace, 'el enlace a la licencia'],
+          ...(lic.exigeAvisoDeCambios ? [[/modific/i, 'el aviso de modificaciones']] : [])
+        ].filter(([re]) => !re.test(html)).map(([, nombre]) => nombre);
+        if (faltan.length) fallo(`${et} falta en el crédito del modelo 3D: ${faltan.join(', ')}`);
+        else ok(`${et} crédito ${lic.nombre} completo (${autor})`);
+      }
+    }
+  }
 
   if (rutaDe(p) === '/') {
     const psrc = (poster?.[1].match(/src="([^"]+)"/) ?? [])[1];
